@@ -1,0 +1,42 @@
+{
+    // Use IntelliSense to find out which attributes exist for C# debugging
+    // Use hover for the description of the existing attributes
+    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "client",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_Client",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/Client/bin/Debug/netcoreapp2.1/Client.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Client",
+            // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "name": "server",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_Server",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp2.1/Server.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Client",
+            // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:pickProcess}"
+        },
+    ]
+}

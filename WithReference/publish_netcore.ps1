@@ -1,0 +1,1 @@
+﻿dotnet.exe publish .\ConsoleApp\ConsoleApp.csproj -c release -r win-x64 -f netcoreapp2.1

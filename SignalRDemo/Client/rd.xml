@@ -1,0 +1,57 @@
+<Directives>
+    <Application>
+        <Assembly Name="Client">
+        </Assembly>
+
+        <Assembly Name="Common">
+            <Type Name="Common.ObjParam,Common" Dynamic="Required All" />
+            <Type Name="Common.ObjParamWithArray,Common" Dynamic="Required All" />
+            <Type Name="Common.ObjParamWithList,Common" Dynamic="Required All" />
+            <Type Name="Common.Message,Common" Dynamic="Required All" />
+        </Assembly>
+
+        <Assembly Name="Microsoft.AspNetCore.SignalR.Client">
+            <Type Name="Microsoft.AspNetCore.SignalR.Client.HttpConnectionFactory" Dynamic="Required All" />
+        </Assembly>
+
+        <Assembly Name="Microsoft.AspNetCore.SignalR.Client.Core">
+            <Type Name="Microsoft.AspNetCore.SignalR.Client.HubConnection" Dynamic="Required All" />
+        </Assembly>
+
+        <Assembly Name="Microsoft.AspNetCore.SignalR.Protocols.Json">
+            <Type Name="Microsoft.AspNetCore.SignalR.Protocol.JsonHubProtocol" Dynamic="Required All" />
+        </Assembly>
+
+        <Assembly Name="Microsoft.Extensions.Options">
+            <Type Name="Microsoft.Extensions.Options.OptionsManager`1[[Microsoft.AspNetCore.Http.Connections.Client.HttpConnectionOptions,Microsoft.AspNetCore.Http.Connections.Client]]" Dynamic="Required All" />
+            <Type Name="Microsoft.Extensions.Options.OptionsFactory`1[[Microsoft.AspNetCore.Http.Connections.Client.HttpConnectionOptions,Microsoft.AspNetCore.Http.Connections.Client]]" Dynamic="Required All" />
+            <Type Name="Microsoft.Extensions.Options.OptionsManager`1[[Microsoft.AspNetCore.SignalR.JsonHubProtocolOptions,Microsoft.AspNetCore.SignalR.Protocols.Json]]" Dynamic="Required All" />
+            <Type Name="Microsoft.Extensions.Options.OptionsFactory`1[[Microsoft.AspNetCore.SignalR.JsonHubProtocolOptions,Microsoft.AspNetCore.SignalR.Protocols.Json]]" Dynamic="Required All" />
+            <Type Name="Microsoft.Extensions.Options.OptionsMonitor`1[[Microsoft.Extensions.Logging.LoggerFilterOptions,Microsoft.Extensions.Logging]]" Dynamic="Required All" />
+        </Assembly>
+
+        <Assembly Name="Microsoft.Extensions.DependencyInjection" Dynamic="Required All">
+            <Type Name="Microsoft.Extensions.DependencyInjection.DefaultServiceProviderFactory" Dynamic="Required All" />
+            <Type Name="Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver" Dynamic="Required All" />
+            <Type Name="Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteValidator" Dynamic="Required All" />
+        </Assembly>
+
+        <Assembly Name="Microsoft.Extensions.Logging">
+            <Type Name="Microsoft.Extensions.Logging.LoggerFactory" Dynamic="Required All" />
+        </Assembly>
+
+        <Assembly Name="System.Linq.Expressions">
+            <Type Name="System.Linq.Expressions.ExpressionCreator`1[[Newtonsoft.Json.Serialization.ObjectConstructor`1[[System.Object,System.Private.CoreLib]],Newtonsoft.Json]]" Dynamic="Required All" />
+            <Type Name="System.Linq.Expressions.ExpressionCreator`1[[Newtonsoft.Json.Serialization.ObjectConstructor`1[[Common.ObjParam,Common]],Newtonsoft.Json]]" Dynamic="Required All" />
+            <Type Name="System.Linq.Expressions.ExpressionCreator`1[[System.Func`2[[System.Object,System.Private.CoreLib],[System.Object,System.Private.CoreLib]],System.Private.CoreLib]]" Dynamic="Required All" />
+        </Assembly>
+
+        <Assembly Name="Newtonsoft.Json">
+            <Type Name="Newtonsoft.Json.Serialization.ObjectConstructor`1[[System.Object,System.Private.CoreLib]]" Dynamic="Required All" />
+            <!-- <Type Name="Newtonsoft.Json.Serialization.ObjectConstructor`1[[Common.ObjParam,Common]]" Dynamic="Required All" /> -->
+            <!-- <Type Name="Newtonsoft.Json.Serialization.ObjectConstructor`1[[Common.Message,Common]]" Dynamic="Required All" /> -->
+            <Type Name="Newtonsoft.Json.Utilities.CollectionWrapper`1[[Common.Message,Common]]" Dynamic="Required All" />
+        </Assembly>
+
+    </Application>
+</Directives>

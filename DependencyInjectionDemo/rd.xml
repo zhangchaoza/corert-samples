@@ -1,0 +1,14 @@
+<Directives>
+    <Application>
+        <Assembly Name="DIDemo">
+            <Type Name="DIDemo.TestOption" Dynamic="Required All" />
+        </Assembly>
+
+        <Assembly Name="Microsoft.Extensions.Options">
+            <Type Name="Microsoft.Extensions.Options.OptionsManager`1[[DIDemo.TestOption,DIDemo]]" Dynamic="Required All" />
+            <Type Name="Microsoft.Extensions.Options.OptionsFactory`1[[DIDemo.TestOption,DIDemo]]" Dynamic="Required All" />
+            <!-- <Type Name="Microsoft.Extensions.Options.OptionsMonitor`1[[Microsoft.Extensions.Logging.Console.ConsoleLoggerOptions,Microsoft.Extensions.Logging.Console]]" Dynamic="Required All" /> -->
+        </Assembly>
+
+    </Application>
+</Directives>

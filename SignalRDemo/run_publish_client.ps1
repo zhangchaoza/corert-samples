@@ -1,0 +1,1 @@
+﻿.\Client\bin\Release\netcoreapp2.1\win-x64\publish\Client.exe

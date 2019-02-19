@@ -1,0 +1,21 @@
+<Directives>
+    <Application>
+        <Assembly Name="JsonDemo">
+            <Type Name="JsonDemo.Model,JsonDemo" Dynamic="Required All" />
+            <Type Name="JsonDemo.InnerObject,JsonDemo" Dynamic="Required All" />
+        </Assembly>
+
+        <Assembly Name="System.Linq.Expressions">
+            <!-- <Type Name="System.Linq.Expressions.ExpressionCreator`1[[Newtonsoft.Json.Serialization.ObjectConstructor`1[[System.Object,System.Private.CoreLib]],Newtonsoft.Json]]" Dynamic="Required All" /> -->
+            <!-- <Type Name="System.Linq.Expressions.ExpressionCreator`1[[Newtonsoft.Json.Serialization.ObjectConstructor`1[[JsonDemo.Model,JsonDemo]],Newtonsoft.Json]]" Dynamic="Required All" /> -->
+            <!-- <Type Name="System.Linq.Expressions.ExpressionCreator`1[[System.Func`2[[System.Object,System.Private.CoreLib],[System.Object,System.Private.CoreLib]],System.Private.CoreLib]]" Dynamic="Required All" /> -->
+        </Assembly>
+
+        <Assembly Name="Newtonsoft.Json">
+            <Type Name="Newtonsoft.Json.Serialization.ObjectConstructor`1[[System.Object,System.Private.CoreLib]]" Dynamic="Required All" />
+            <Type Name="Newtonsoft.Json.Utilities.CollectionWrapper`1[[JsonDemo.InnerObject,JsonDemo]]" Dynamic="Required All" />
+            <Type Name="Newtonsoft.Json.JsonPropertyAttribute" Dynamic="Required All" />
+        </Assembly>
+
+    </Application>
+</Directives>
