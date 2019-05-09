@@ -1,0 +1,56 @@
+<Directives>
+    <Application>
+        <Assembly Name="CommandlineApiDemo">
+        </Assembly>
+
+        <Assembly Name="System.CommandLine" Dynamic="Required All">
+        </Assembly>
+
+        <!-- Unhandled Exception: EETypeRva:0x00660498(System.Reflection.MissingRuntimeArtifactException):  -->
+        <!-- MakeGenericMethod() cannot create this generic method instantiation because the instantiation was not metadata-enabled: 'System.Linq.Enumerable.ToArray<System.Int32>(System.Collections.Generic.IEnumerable<System.Int32>)' -->
+        <Assembly Name="System.Linq" Dynamic="Required All">
+            <Type Name="System.Linq.Enumerable" Dynamic="Required All">
+                <Method Name="ToArray" Dynamic="Required All">
+                    <GenericArgument Name="System.Int32, System.Private.CoreLib" />
+                </Method>
+            </Type>
+        </Assembly>
+
+        <!-- System.Runtime.CompilerServices.CallSiteOps.CreateMatchmaker<System.Func<System.Runtime.CompilerServices.CallSite,System.Object,System.Object>>(System.Runtime.CompilerServices.CallSite<System.Func<System.Runtime.CompilerServices.CallSite,System.Object,System.Object>>) -->
+        <!-- Unhandled exception: System.Reflection.MissingMetadataException: 'System.Linq.Expressions.ExpressionCreator<System.Func<System.Runtime.CompilerServices.CallSite,System.Object,System.Object>>' is missing metadata. -->
+        <!-- Unhandled exception: EETypeRva:0x005C7BA0(System.Reflection.MissingRuntimeArtifactException): MakeGenericMethod() cannot create this generic method instantiation because the instantiation was not metadata-enabled: 'System.Runtime.CompilerServices.CallSiteOps.CreateMatchmaker<System.Func<System.Runtime.CompilerServices.CallSite,System.Object,System.Object>>(System.Runtime.CompilerServices.CallSite<System.Func<System.Runtime.CompilerServices.CallSite,System.Object,System.Object>>)' For more information, please visit http://go.microsoft.com/fwlink/?LinkID=616868 -->
+        <Assembly Name="System.Linq.Expressions">
+            <!-- <Type Name="System.Linq.Expressions.ExpressionCreator`1[[Newtonsoft.Json.Serialization.ObjectConstructor`1[[System.Object,System.Private.CoreLib]],Newtonsoft.Json]]" Dynamic="Required All" />
+            <Type Name="System.Linq.Expressions.ExpressionCreator`1[[Newtonsoft.Json.Serialization.ObjectConstructor`1[[JsonDemo.Model,JsonDemo]],Newtonsoft.Json]]" Dynamic="Required All" /> -->
+            <!-- <Type Name="System.Linq.Expressions.ExpressionCreator`1[[System.Func`2[[System.Runtime.CompilerServices.CallSite,System.Object]],System.Runtime.CompilerServices]]" Dynamic="Required All" /> -->
+            <!-- <Type Name="System.Linq.Expressions.ExpressionCreator{System.Func{System.Runtime.CompilerServices.CallSite,System.Object,System.Object}}" Dynamic="Required All" /> -->
+            <Type Name="System.Linq.Expressions.ExpressionCreator`1[[System.Func`3[[System.Runtime.CompilerServices.CallSite,System.Core],[System.Object,System.Private.CoreLib],[System.Object,System.Private.CoreLib]],System.Private.CoreLib]]" Dynamic="Required All">
+                <!-- <Method Name="CreateGeneric" Dynamic="Required All">
+                    <GenericArgument Name="Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext`8[[DataExplorer.IdentityServer.Models.ApplicationUser,DataExplorer.IdentityServer],[DataExplorer.IdentityServer.Models.ApplicationRole,DataExplorer.IdentityServer],[System.String,System.Private.CoreLib],[Microsoft.AspNetCore.Identity.IdentityUserClaim`1[[System.String,System.Private.CoreLib]],Microsoft.Extensions.Identity.Stores],[Microsoft.AspNetCore.Identity.IdentityUserRole`1[[System.String,System.Private.CoreLib]],Microsoft.Extensions.Identity.Stores],[Microsoft.AspNetCore.Identity.IdentityUserLogin`1[[System.String,System.Private.CoreLib]],Microsoft.Extensions.Identity.Stores],[Microsoft.AspNetCore.Identity.IdentityRoleClaim`1[[System.String,System.Private.CoreLib]],Microsoft.Extensions.Identity.Stores],[Microsoft.AspNetCore.Identity.IdentityUserToken`1[[System.String,System.Private.CoreLib]],Microsoft.Extensions.Identity.Stores]], Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+                    <GenericArgument Name="Microsoft.EntityFrameworkCore.DbSet`1[[Microsoft.AspNetCore.Identity.IdentityRoleClaim`1[[System.String,System.Private.CoreLib]],Microsoft.Extensions.Identity.Stores]]"/>
+                    <GenericArgument Name="Microsoft.EntityFrameworkCore.DbSet`1[[Microsoft.AspNetCore.Identity.IdentityRoleClaim`1[[System.String,System.Private.CoreLib]],Microsoft.Extensions.Identity.Stores]]"/>
+                </Method> -->
+            </Type>
+        </Assembly>
+
+        <!-- <Assembly Name="Microsoft.EntityFrameworkCore">
+            <Type Name="Microsoft.EntityFrameworkCore.Query.QueryContextDependencies" Dynamic="Required All" />
+            <Type Name="Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler" Dynamic="Required All" />
+            <Type Name="Microsoft.EntityFrameworkCore.ChangeTracking.Internal.EntityGraphAttacher" Dynamic="Required All" />
+            <Type Name="Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryProvider" Dynamic="Required All" />
+            <Type Name="Microsoft.EntityFrameworkCore.ChangeTracking.Internal.ChangeDetector" Dynamic="Required All" />
+            <Type Name="Microsoft.EntityFrameworkCore.Internal.DbContextDependencies" Dynamic="Required All" />
+            <Type Name="Microsoft.EntityFrameworkCore.Internal.DiagnosticsLogger`1[[Microsoft.EntityFrameworkCore.DbLoggerCategory+Infrastructure,Microsoft.EntityFrameworkCore]]" Dynamic="Required All" />
+            <Type Name="Microsoft.EntityFrameworkCore.Internal.DbSetInitializer" Dynamic="Required All" />
+            <Type Name="Microsoft.EntityFrameworkCore.Metadata.Internal.ClrAccessorFactory`1[[Microsoft.EntityFrameworkCore.Metadata.Internal.IClrPropertySetter,Microsoft.EntityFrameworkCore]]" Dynamic="Required All">
+                <Method Name="CreateGeneric" Dynamic="Required All">
+                    <GenericArgument Name="Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext`8[[DataExplorer.IdentityServer.Models.ApplicationUser,DataExplorer.IdentityServer],[DataExplorer.IdentityServer.Models.ApplicationRole,DataExplorer.IdentityServer],[System.String,System.Private.CoreLib],[Microsoft.AspNetCore.Identity.IdentityUserClaim`1[[System.String,System.Private.CoreLib]],Microsoft.Extensions.Identity.Stores],[Microsoft.AspNetCore.Identity.IdentityUserRole`1[[System.String,System.Private.CoreLib]],Microsoft.Extensions.Identity.Stores],[Microsoft.AspNetCore.Identity.IdentityUserLogin`1[[System.String,System.Private.CoreLib]],Microsoft.Extensions.Identity.Stores],[Microsoft.AspNetCore.Identity.IdentityRoleClaim`1[[System.String,System.Private.CoreLib]],Microsoft.Extensions.Identity.Stores],[Microsoft.AspNetCore.Identity.IdentityUserToken`1[[System.String,System.Private.CoreLib]],Microsoft.Extensions.Identity.Stores]], Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+                    <GenericArgument Name="Microsoft.EntityFrameworkCore.DbSet`1[[Microsoft.AspNetCore.Identity.IdentityRoleClaim`1[[System.String,System.Private.CoreLib]],Microsoft.Extensions.Identity.Stores]]"/>
+                    <GenericArgument Name="Microsoft.EntityFrameworkCore.DbSet`1[[Microsoft.AspNetCore.Identity.IdentityRoleClaim`1[[System.String,System.Private.CoreLib]],Microsoft.Extensions.Identity.Stores]]"/>
+                </Method>
+            </Type>
+            <Type Name="Microsoft.EntityFrameworkCore.Storage.DatabaseProvider`1[[Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.Internal.NpgsqlOptionsExtension,Npgsql.EntityFrameworkCore.PostgreSQL]]" Dynamic="Required All" />
+        </Assembly> -->
+
+    </Application>
+</Directives>

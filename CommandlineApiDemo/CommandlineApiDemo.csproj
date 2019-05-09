@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <RdXmlFile Include="rd.xml" />
+    <!-- Generate extra data to make stack traces nicer -->
+    <IlcArg Include="--stacktracedata" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="1.0.0-alpha-27527-01" />
+    <!--<PackageReference Include="System.CommandLine.Experimental" Version="0.2.0-alpha.19174.3" />-->
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\github\dotnet\command-line-api\src\System.CommandLine\System.CommandLine.csproj" />
+  </ItemGroup>
+
+  <!-- <ItemGroup>
+    <Reference Include="System.CommandLine">
+      <HintPath>..\..\..\..\..\github\dotnet\command-line-api\artifacts\bin\System.CommandLine\Debug\netstandard2.0\System.CommandLine.dll</HintPath>
+    </Reference>
+  </ItemGroup> -->
+
+  <!-- <ItemGroup>
+    <Reference Include="System.CommandLine">
+      <HintPath>System.CommandLine.dll</HintPath>
+    </Reference>
+  </ItemGroup> -->
+
+</Project>
