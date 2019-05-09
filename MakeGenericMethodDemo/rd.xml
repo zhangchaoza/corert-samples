@@ -1,0 +1,22 @@
+<Directives>
+    <Application>
+
+        <Assembly Name="MakeGenericMethodDemo" Dynamic="Required All">
+            <Type Name="MakeGenericMethodDemo.Example">
+                <Method Name="Generic" Dynamic="Required">
+                    <GenericArgument Name="System.Int32, System.Private.CoreLib" />
+                </Method>
+            </Type>
+        </Assembly>
+
+        <Assembly Name="System.Linq" Dynamic="Required All">
+            <Type Name="System.Linq.Enumerable" Dynamic="Required All">
+                <Method Name="ToArray" Dynamic="Required All">
+                    <GenericArgument Name="System.Int32, System.Private.CoreLib" />
+                    <!-- <GenericArgument Name="System.Collections.Generic.List`1[[System.Int32, System.Private.CoreLib]],System.Collections" /> -->
+                </Method>
+            </Type>
+        </Assembly>
+
+    </Application>
+</Directives>
