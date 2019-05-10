@@ -17,12 +17,12 @@ namespace CommandlineApiDemo
 
         static void Main(string[] args)
         {
-            RunTest("SimpletMethod(:参数分隔)", SimpletMethod, "-i:123", "-b");
-            RunTest("SimpletMethod(=参数分隔)", SimpletMethod, "-i=123", "-b");
-            RunTest("SimpletMethod(空格参数分隔)", SimpletMethod, "-i", "123", "-b");
+            RunTest("(:参数分隔)", SimpletMethod, "-i:123", "-b");
+            RunTest("(=参数分隔)", SimpletMethod, "-i=123", "-b");
+            RunTest("(空格参数分隔)", SimpletMethod, "-i", "123", "-b");
 
-            RunTest(null, MiddlewarePipeline, "[just-say-hi]", "[just-say-hi2]", "-i=3", "-i=4");
-            RunTest(null, MiddlewarePipeline, "-i=3", "-i=4", "-b", "--file-option=file.txt");
+            RunTest("custom", MiddlewarePipeline, "[just-say-hi]", "[just-say-hi2]", "-i=3", "-i=4");
+            RunTest("nomal", MiddlewarePipeline, "-i=3", "-i=4", "-b", "--file-option=file.txt");
             RunTest("help", MiddlewarePipeline, "-h");
             RunTest("version", MiddlewarePipeline, "--version");
             RunTest("parse-error", MiddlewarePipeline, "[parse]", "--int-option=not-an-int", "--file-option=file.txt");

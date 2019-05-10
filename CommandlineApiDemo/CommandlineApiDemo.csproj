@@ -16,12 +16,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="1.0.0-alpha-27527-01" />
-    <!--<PackageReference Include="System.CommandLine.Experimental" Version="0.2.0-alpha.19174.3" />-->
+    <PackageReference Include="System.CommandLine.Experimental" Version="0.2.0-alpha.19174.3" />
   </ItemGroup>
 
-  <ItemGroup>
+  <!-- <ItemGroup>
     <ProjectReference Include="..\..\..\dotnet\command-line-api\src\System.CommandLine\System.CommandLine.csproj" />
-  </ItemGroup>
+  </ItemGroup> -->
 
   <!-- <ItemGroup>
     <Reference Include="System.CommandLine">
