@@ -19,9 +19,9 @@
         <!-- System.Runtime.CompilerServices.CallSiteOps.CreateMatchmaker<System.Func<System.Runtime.CompilerServices.CallSite,System.Object,System.Object>>(System.Runtime.CompilerServices.CallSite<System.Func<System.Runtime.CompilerServices.CallSite,System.Object,System.Object>>) -->
         <!-- Unhandled exception: System.Reflection.MissingMetadataException: 'System.Linq.Expressions.ExpressionCreator<System.Func<System.Runtime.CompilerServices.CallSite,System.Object,System.Object>>' is missing metadata. -->
         <!-- Unhandled exception: EETypeRva:0x005C7BA0(System.Reflection.MissingRuntimeArtifactException): MakeGenericMethod() cannot create this generic method instantiation because the instantiation was not metadata-enabled: 'System.Runtime.CompilerServices.CallSiteOps.CreateMatchmaker<System.Func<System.Runtime.CompilerServices.CallSite,System.Object,System.Object>>(System.Runtime.CompilerServices.CallSite<System.Func<System.Runtime.CompilerServices.CallSite,System.Object,System.Object>>)' For more information, please visit http://go.microsoft.com/fwlink/?LinkID=616868 -->
-        <Assembly Name="System.Linq.Expressions">
+        <!-- <Assembly Name="System.Linq.Expressions">
             <Type Name="System.Linq.Expressions.ExpressionCreator`1[[System.Func`3[[System.Runtime.CompilerServices.CallSite,System.Core],[System.Object,System.Private.CoreLib],[System.Object,System.Private.CoreLib]],System.Private.CoreLib]]" Dynamic="Required All"/>
-        </Assembly>
+        </Assembly> -->
 
         <!-- <Assembly Name="Microsoft.EntityFrameworkCore">
             <Type Name="Microsoft.EntityFrameworkCore.Query.QueryContextDependencies" Dynamic="Required All" />
