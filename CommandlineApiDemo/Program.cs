@@ -17,16 +17,23 @@ namespace CommandlineApiDemo
 
         static void Main(string[] args)
         {
+            RunTest("SimpletMethod(:参数分隔)", SimpletMethod, "-i:123", "-b");
+            RunTest("SimpletMethod(=参数分隔)", SimpletMethod, "-i=123", "-b");
+            RunTest("SimpletMethod(空格参数分隔)", SimpletMethod, "-i", "123", "-b");
+
             RunTest(null, MiddlewarePipeline, "[just-say-hi]", "[just-say-hi2]", "-i=3", "-i=4");
             RunTest(null, MiddlewarePipeline, "-i=3", "-i=4", "-b", "--file-option=file.txt");
-            // RunTest("help", MiddlewarePipeline, "-h");
-            // RunTest("version", MiddlewarePipeline, "--version");
-            // RunTest("parse", MiddlewarePipeline, "[parse]", "--int-option=not-an-int", "--file-option=file.txt");
+            RunTest("help", MiddlewarePipeline, "-h");
+            RunTest("version", MiddlewarePipeline, "--version");
+            RunTest("parse-error", MiddlewarePipeline, "[parse]", "--int-option=not-an-int", "--file-option=file.txt");
+            RunTest("parse-right", MiddlewarePipeline, "[parse]", "-i=3", "-i=4", "-b", "--file-option=file.txt");
+            RunTest("subcommand", MiddlewarePipeline, "subcommand");
+
+            // corert编译后程序不支持dotnet core attach
             // RunTest("debug", MiddlewarePipeline, "[debug]", "-i=3", "-i=4");
 
-            RunTest(null, SimpletMethod, "-i:123", "-b");
-            RunTest(null, SimpletMethod, "-i=123", "-b");
-            RunTest(null, SimpletMethod, "-i", "123", "-b");
+            Console.WriteLine("\n任意键退出");
+            Console.ReadLine();
         }
 
         static int SimpletMethod(params string[] args)
@@ -89,7 +96,7 @@ namespace CommandlineApiDemo
             // Create some options and a parser
             var optionThatTakesInt = new Option(
                alias: "--int-option",
-               description: "An option whose argument is parsed as an int",
+               description: "An option whose argument is parsed as an int[]",
                argument: new Argument<int[]>(defaultValue: new int[] { 1, 2, 3 })
                {
                    Arity = ArgumentArity.OneOrMore
@@ -137,14 +144,21 @@ namespace CommandlineApiDemo
             // return rootCommand.InvokeAsync(new string[] { "-i:1", "-i:2", "-b" }).GetAwaiter().GetResult();
 
             var subcommand = new Command("subcommand");
-            subcommand.Handler = CommandHandler.Create(() =>
+            subcommand.AddOption(new Option(
+                aliases: new string[] { "--i-op" },
+                description: "An option whose argument is parsed as an int",
+                argument: new Argument<int>()
+                {
+                    Arity = ArgumentArity.ExactlyOne
+                }));
+            subcommand.Handler = CommandHandler.Create<int>((iOption) =>
             {
-                Console.WriteLine("subcommand");
+                Console.WriteLine($"subcommand : {iOption}");
             });
 
             Console.WriteLine("inited");
 
-            var parse = new CommandLineBuilder(rootCommand)
+            var builder = new CommandLineBuilder(rootCommand)
             .AddCommand(subcommand)
             .UseHelp()
             .UseVersionOption()
@@ -167,10 +181,10 @@ namespace CommandlineApiDemo
             }).Build();
 
             Console.WriteLine("created");
-            return parse.InvokeAsync(args).Result;
+            return builder.InvokeAsync(args).Result;
         }
 
-        static string EndTestLine = "==================================================";
+        #region Run A Test Method
 
         delegate int TestMethod(params string[] args);
         static void RunTest(string name, TestMethod method, params string[] args)
@@ -182,13 +196,13 @@ namespace CommandlineApiDemo
                 mainName = method.Method.Name + split + name;
             }
 
-            int last = 50 - mainName.Length;
-            Console.Write(mainName);
-            Console.WriteLine(EndTestLine.Substring(0, last));
+            Console.WriteLine(mainName.PadRight(50, '='));
 
             method(args);
 
             Console.WriteLine();
         }
+
+        #endregion
     }
 }
