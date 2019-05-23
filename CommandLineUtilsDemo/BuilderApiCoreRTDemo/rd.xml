@@ -1,0 +1,41 @@
+<Directives>
+    <Application>
+
+        <Assembly Name="BuilderApiCoreRTDemo" Dynamic="Required All">
+        </Assembly>
+
+        <!-- <Assembly Name="Commands" Dynamic="Required All">
+            <Type Name="Commands.Primary" Dynamic="Required All" />
+            <Type Name="Commands.SubCommand1" Dynamic="Required All" />
+        </Assembly>
+
+        <Assembly Name="McMaster.Extensions.CommandLineUtils" Dynamic="Required All">
+            <Type Name="McMaster.Extensions.CommandLineUtils.CommandLineApplication`1[[Commands.Primary,Commands]]" Dynamic="Required All" />
+            <Type Name="McMaster.Extensions.CommandLineUtils.CommandLineApplication`1[[Commands.SubCommand1,Commands]]" Dynamic="Required All" />
+            <Type Name="McMaster.Extensions.CommandLineUtils.OptionAttribute,McMaster.Extensions.CommandLineUtils" Dynamic="Required All" />
+
+            <Type Name="McMaster.Extensions.CommandLineUtils.Abstractions.StringValueParser,McMaster.Extensions.CommandLineUtils" Dynamic="Required All" />
+            <Type Name="McMaster.Extensions.CommandLineUtils.Abstractions.BooleanValueParser,McMaster.Extensions.CommandLineUtils" Dynamic="Required All" />
+            <Type Name="McMaster.Extensions.CommandLineUtils.Abstractions.ByteValueParser,McMaster.Extensions.CommandLineUtils" Dynamic="Required All" />
+            <Type Name="McMaster.Extensions.CommandLineUtils.Abstractions.Int16ValueParser,McMaster.Extensions.CommandLineUtils" Dynamic="Required All" />
+            <Type Name="McMaster.Extensions.CommandLineUtils.Abstractions.Int32ValueParser,McMaster.Extensions.CommandLineUtils" Dynamic="Required All" />
+            <Type Name="McMaster.Extensions.CommandLineUtils.Abstractions.Int64ValueParser,McMaster.Extensions.CommandLineUtils" Dynamic="Required All" />
+            <Type Name="McMaster.Extensions.CommandLineUtils.Abstractions.UInt16ValueParser,McMaster.Extensions.CommandLineUtils" Dynamic="Required All" />
+            <Type Name="McMaster.Extensions.CommandLineUtils.Abstractions.UInt32ValueParser,McMaster.Extensions.CommandLineUtils" Dynamic="Required All" />
+            <Type Name="McMaster.Extensions.CommandLineUtils.Abstractions.UInt64ValueParser,McMaster.Extensions.CommandLineUtils" Dynamic="Required All" />
+            <Type Name="McMaster.Extensions.CommandLineUtils.Abstractions.FloatValueParser,McMaster.Extensions.CommandLineUtils" Dynamic="Required All" />
+            <Type Name="McMaster.Extensions.CommandLineUtils.Abstractions.DoubleValueParser,McMaster.Extensions.CommandLineUtils" Dynamic="Required All" />
+            <Type Name="McMaster.Extensions.CommandLineUtils.Abstractions.UriValueParser,McMaster.Extensions.CommandLineUtils" Dynamic="Required All" />
+        </Assembly>
+
+        <Assembly Name="System.Linq.Expressions">
+            <Type Name="System.Linq.Expressions.ExpressionCreator`1[[McMaster.Extensions.CommandLineUtils.Conventions.CommandAttributeConvention,McMaster.Extensions.CommandLineUtils]]" Dynamic="Required All" />
+            <Type Name="System.Linq.Expressions.ExpressionCreator`1[[McMaster.Extensions.CommandLineUtils.Conventions.VersionOptionFromMemberAttributeConvention,McMaster.Extensions.CommandLineUtils]]" Dynamic="Required All" />
+            <Type Name="System.Linq.Expressions.ExpressionCreator`1[[McMaster.Extensions.CommandLineUtils.Conventions.VersionOptionAttributeConvention,McMaster.Extensions.CommandLineUtils]]" Dynamic="Required All" />
+            <Type Name="System.Linq.Expressions.ExpressionCreator`1[[McMaster.Extensions.CommandLineUtils.Conventions.HelpOptionAttributeConvention,McMaster.Extensions.CommandLineUtils]]" Dynamic="Required All" />
+            <Type Name="System.Linq.Expressions.ExpressionCreator`1[[McMaster.Extensions.CommandLineUtils.Conventions.OptionAttributeConvention,McMaster.Extensions.CommandLineUtils]]" Dynamic="Required All" />
+            <Type Name="System.Linq.Expressions.ExpressionCreator`1[[McMaster.Extensions.CommandLineUtils.Conventions.ArgumentAttributeConvention,McMaster.Extensions.CommandLineUtils]]" Dynamic="Required All" />
+            <Type Name="System.Linq.Expressions.ExpressionCreator`1[[McMaster.Extensions.CommandLineUtils.Conventions.SubcommandAttributeConvention,McMaster.Extensions.CommandLineUtils]]" Dynamic="Required All" />
+        </Assembly> -->
+    </Application>
+</Directives>

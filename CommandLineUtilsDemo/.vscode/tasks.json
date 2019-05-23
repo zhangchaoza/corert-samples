@@ -1,0 +1,88 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/BuilderApiCoreRTDemo/BuilderApiCoreRTDemo.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build_linux",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/BuilderApiCoreRTDemo/BuilderApiCoreRTDemo.csproj",
+                "-f:netcoreapp2.1"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "restore",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "restore",
+                "${workspaceFolder}/BuilderApiCoreRTDemo/BuilderApiCoreRTDemo.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish_win-x64",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/BuilderApiCoreRTDemo/BuilderApiCoreRTDemo.csproj",
+                "-c:release",
+                "-r:win-x64",
+                "-f:netcoreapp2.1"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish_win-x86",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/BuilderApiCoreRTDemo/BuilderApiCoreRTDemo.csproj",
+                "-c:release",
+                "-r:win-x86",
+                "-f:netcoreapp2.1"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish_linux-x64",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/BuilderApiCoreRTDemo/BuilderApiCoreRTDemo.csproj",
+                "-c:release",
+                "-r:linux-x64",
+                "-f:netcoreapp2.1"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish_linux-x86",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/BuilderApiCoreRTDemo/BuilderApiCoreRTDemo.csproj",
+                "-c:release",
+                "-r:linux-x86",
+                "-f:netcoreapp2.1"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

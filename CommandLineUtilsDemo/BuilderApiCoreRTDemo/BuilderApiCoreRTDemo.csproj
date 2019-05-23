@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <!-- <TargetFrameworks>netcoreapp3.0;net471</TargetFrameworks> -->
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <StartupObject>BuilderApiCoreRTDemo.Program</StartupObject>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
+    <RdXmlFile Include="rd.xml" />
+    <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="1.0.0-alpha-27527-01"/>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommandLineUtils\CommandLineUtils.csproj" />
+  </ItemGroup>
+</Project>

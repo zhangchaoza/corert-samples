@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.0-alpha2-08</Version>
+    <Authors>zhangcaho</Authors>
+    <Company>ZCStudio</Company>
+    <RepositoryUrl>https://github.com/zhangchaoza/corert-samples/tree/master/CommandLineUtils</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright © 2019 ZCStudio</Copyright>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Memory" Version="4.5.3"/>
+    <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="2.3.4"/>
+  </ItemGroup>
+</Project>

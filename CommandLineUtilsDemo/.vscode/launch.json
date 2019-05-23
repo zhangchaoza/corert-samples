@@ -1,0 +1,88 @@
+{
+    // Use IntelliSense to find out which attributes exist for C# debugging
+    // Use hover for the description of the existing attributes
+    // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "run on win",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/BuilderApiCoreRTDemo/bin/Debug/netcoreapp3.0/BuilderApiCoreRTDemo.dll",
+            // "args": [],
+            // "args": [
+            //     "--version"
+            // ],
+            // "args": ["-h"],
+            // "args": [
+            //     "subcommand1",
+            //     "-h"
+            // ],
+            "args": [
+                "subcommand1",
+                "20",
+                "hello world vscode",
+                "-s:haha",
+                "-r:50",
+                "-v",
+                "-a:123"
+            ],
+            // "args": [
+            //     "delaycommand",
+            //     "-h"
+            // ],
+            // "args": [
+            //     "subcommand1",
+            //     "delaycommand",
+            //     "-r:12",
+            //     // "--help"
+            //     "-s:haha"
+            // ],
+            "cwd": "${workspaceFolder}",
+            // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "name": "run on linux",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_linux",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/BuilderApiCoreRTDemo/bin/Debug/netcoreapp3.0/BuilderApiCoreRTDemo.dll",
+            // "args": [],
+            // "args": [
+            //     "--version"
+            // ],
+            // "args": ["-h"],
+            // "args": [
+            //     "subcommand1",
+            //     "-h"
+            // ],
+            "args": [
+                "subcommand1",
+                "20",
+                "-s:haha",
+                "-r:50"
+            ],
+            // "args": [
+            //     "delaycommand",
+            //     "-h"
+            // ],
+            "cwd": "${workspaceFolder}",
+            // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:pickProcess}"
+        },
+    ]
+}
