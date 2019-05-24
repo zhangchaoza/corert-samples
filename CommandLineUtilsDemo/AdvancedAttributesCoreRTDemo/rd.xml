@@ -1,0 +1,25 @@
+<Directives>
+    <Application>
+
+        <!-- <Assembly Name="AdvancedAttributesCoreRTDemo" Dynamic="Required All">
+            <Type Name="AdvancedAttributesCoreRTDemo.Primary" Dynamic="Required All" />
+            <Type Name="AdvancedAttributesCoreRTDemo.SubCommand1" Dynamic="Required All" />
+        </Assembly> -->
+
+        <!-- <Assembly Name="McMaster.Extensions.CommandLineUtils" Dynamic="Required All">
+            <Type Name="McMaster.Extensions.CommandLineUtils.Abstractions.IValueParser" Dynamic="Required All">
+                <Type Name="McMaster.Extensions.CommandLineUtils.Abstractions.IValueParser`1[[System.Nullable`1[[System.Int32,System.Private.CoreLib]],System.Private.CoreLib]]" Dynamic="Required All"/>
+            </Type>
+        </Assembly> -->
+
+        <!-- <Assembly Name="McMaster.Extensions.CommandLineUtils" Dynamic="Required All">
+            <Type Name="McMaster.Extensions.CommandLineUtils.Abstractions.ValueParserProvider" Dynamic="Required All">
+                <Method Name="GetParser" Dynamic="Required All">
+                    <GenericArgument Name="System.Nullable`1[[System.Int32,System.Private.CoreLib]], System.Private.CoreLib" />
+                    <GenericArgument Name="System.Int32,System.Private.CoreLib" />
+                </Method>
+            </Type>
+        </Assembly> -->
+
+    </Application>
+</Directives>
