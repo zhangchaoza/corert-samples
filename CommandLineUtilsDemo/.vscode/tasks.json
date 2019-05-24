@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/BuilderApiCoreRTDemo.sln"
+                "${workspaceFolder}/CommandLineUtilsDemo.sln"
             ],
             "problemMatcher": "$msCompile"
         },
@@ -17,7 +17,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/BuilderApiCoreRTDemo.sln",
+                "${workspaceFolder}/CommandLineUtilsDemo.sln",
                 "-f:netcoreapp2.1"
             ],
             "problemMatcher": "$msCompile"
@@ -28,7 +28,7 @@
             "type": "process",
             "args": [
                 "restore",
-                "${workspaceFolder}/BuilderApiCoreRTDemo.sln"
+                "${workspaceFolder}/CommandLineUtilsDemo.sln"
             ],
             "problemMatcher": "$msCompile"
         },

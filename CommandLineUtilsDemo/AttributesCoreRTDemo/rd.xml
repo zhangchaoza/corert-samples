@@ -1,10 +1,10 @@
 <Directives>
     <Application>
 
-        <Assembly Name="AttributesCoreRTDemo" Dynamic="Required All">
+        <!-- <Assembly Name="AttributesCoreRTDemo" Dynamic="Required All">
             <Type Name="AttributesCoreRTDemo.Primary" Dynamic="Required All" />
             <Type Name="AttributesCoreRTDemo.SubCommand1" Dynamic="Required All" />
-        </Assembly>
+        </Assembly> -->
 
         <!-- <Assembly Name="McMaster.Extensions.CommandLineUtils" Dynamic="Required All">
             <Type Name="McMaster.Extensions.CommandLineUtils.Abstractions.IValueParser" Dynamic="Required All">

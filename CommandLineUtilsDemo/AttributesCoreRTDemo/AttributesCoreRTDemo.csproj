@@ -10,17 +10,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="2.3.4"/> -->
-    <!-- <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="*" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="*" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="*" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="*" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="*" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="*" /> -->
+    <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="2.3.4"/>
   </ItemGroup>
 
-  <ItemGroup>
+  <!-- <ItemGroup>
     <ProjectReference Include="..\..\..\..\other\CommandLineUtils\src\CommandLineUtils\McMaster.Extensions.CommandLineUtils.csproj" />
-  </ItemGroup>
+  </ItemGroup> -->
 
 </Project>
