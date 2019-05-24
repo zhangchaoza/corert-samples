@@ -7,6 +7,21 @@
                     <GenericArgument Name="System.Int32, System.Private.CoreLib" />
                 </Method>
             </Type>
+            <Type Name="MakeGenericMethodDemo.Example2">
+                <!-- <Method Name="Generic" Dynamic="Required">
+                    <GenericArgument Name="System.Int32, System.Private.CoreLib" />
+                </Method>
+                <Method Name="Generic" Dynamic="Required">
+                    <GenericArgument Name="System.Boolean, System.Private.CoreLib" />
+                </Method>
+                <Method Name="Generic" Dynamic="Required">
+                    <GenericArgument Name="System.Object, System.Private.CoreLib" />
+                </Method> -->
+                <!-- <Method Name="Generic2" Dynamic="Required"> -->
+                <!-- <GenericArgument Name="System.Type, System.Private.CoreLib" /> -->
+                <!-- <GenericArgument Name="System.Type, System.Private.CoreLib" /> -->
+                <!-- </Method> -->
+            </Type>
         </Assembly>
 
         <Assembly Name="System.Linq" Dynamic="Required All">
