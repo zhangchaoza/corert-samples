@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuilderApiCoreRTDemo", "Bui
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandLineUtils", "CommandLineUtils\CommandLineUtils.csproj", "{7671BF40-08F4-4A8C-AA03-DA748EA446E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttributesCoreRTDemo", "AttributesCoreRTDemo\AttributesCoreRTDemo.csproj", "{07552A49-A47F-49CB-BE00-79B0A1822860}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,5 +46,17 @@ Global
 		{7671BF40-08F4-4A8C-AA03-DA748EA446E9}.Release|x64.Build.0 = Release|Any CPU
 		{7671BF40-08F4-4A8C-AA03-DA748EA446E9}.Release|x86.ActiveCfg = Release|Any CPU
 		{7671BF40-08F4-4A8C-AA03-DA748EA446E9}.Release|x86.Build.0 = Release|Any CPU
+		{07552A49-A47F-49CB-BE00-79B0A1822860}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07552A49-A47F-49CB-BE00-79B0A1822860}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07552A49-A47F-49CB-BE00-79B0A1822860}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{07552A49-A47F-49CB-BE00-79B0A1822860}.Debug|x64.Build.0 = Debug|Any CPU
+		{07552A49-A47F-49CB-BE00-79B0A1822860}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{07552A49-A47F-49CB-BE00-79B0A1822860}.Debug|x86.Build.0 = Debug|Any CPU
+		{07552A49-A47F-49CB-BE00-79B0A1822860}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07552A49-A47F-49CB-BE00-79B0A1822860}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07552A49-A47F-49CB-BE00-79B0A1822860}.Release|x64.ActiveCfg = Release|Any CPU
+		{07552A49-A47F-49CB-BE00-79B0A1822860}.Release|x64.Build.0 = Release|Any CPU
+		{07552A49-A47F-49CB-BE00-79B0A1822860}.Release|x86.ActiveCfg = Release|Any CPU
+		{07552A49-A47F-49CB-BE00-79B0A1822860}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

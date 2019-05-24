@@ -5,7 +5,33 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "run on win",
+            "name": "win_attr",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/AttributesCoreRTDemo/bin/Debug/netcoreapp3.0/AttributesCoreRTDemo.dll",
+            "args": [],
+            // "args": ["-o:1"],
+            // "args": ["-o"],
+            // "args": ["config","10","-v","-so","haha","-mo","v1","-mo","v2","-mo","v3"],
+            // "args": ["config","10","-v","-so","haha","-mo","1","-mo","2","-mo","3"],
+            // "args": [
+            //     "config",
+            //     "-h"
+            // ],
+            // "args": [
+            //     "-v",
+            //     "-i:10"
+            // ],
+            "cwd": "${workspaceFolder}",
+            // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "name": "win_builder",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
@@ -47,7 +73,7 @@
             "internalConsoleOptions": "openOnSessionStart"
         },
         {
-            "name": "run on linux",
+            "name": "linux_builder",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build_linux",
