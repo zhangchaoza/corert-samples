@@ -29,15 +29,16 @@ namespace AdvancedAttributesCoreRTDemo
                     app.Conventions
                         .UseAttributes()
                         .SetAppNameFromEntryAssembly()
-                        .SetRemainingArgsPropertyOnModel()
+                        // .SetRemainingArgsPropertyOnModel()
                         .SetSubcommandPropertyOnModel()
-                        .SetParentPropertyOnModel()
+                        // .SetParentPropertyOnModel()
                         .UseOnExecuteMethodFromModel()
-                        .UseOnValidateMethodFromModel()
-                        .UseOnValidationErrorMethodFromModel()
-                        .UseConstructorInjection()
+                        // .UseOnValidateMethodFromModel()
+                        // .UseOnValidationErrorMethodFromModel()
+                        // .UseConstructorInjection()
                         .UseDefaultHelpOption()
-                        .UseCommandNameFromModelType();
+                        .UseCommandNameFromModelType()
+                        ;
 
                     // app.Conventions.UseConstructorInjection(services);
                     // app.Conventions.UseConstructorInjection();

@@ -8,7 +8,7 @@ namespace AdvancedAttributesCoreRTDemo
 
     [HelpOption("-h|--help", Description = "显示帮助", Inherited = false)]
     [VersionOptionFromMember("--version", MemberName = nameof(Version), Description = "显示版本号", Inherited = false)]
-    [Subcommand(typeof(Subcommand))]
+    [Subcommand(typeof(AttrSubcommand))]
     public class Primary
     {
 
@@ -91,7 +91,7 @@ namespace AdvancedAttributesCoreRTDemo
         }
     }
 
-    public class Subcommand
+    public class AttrSubcommand
     {
         private readonly Primary _app;
 
@@ -103,11 +103,11 @@ namespace AdvancedAttributesCoreRTDemo
 
         #endregion
 
-        public Subcommand()
+        public AttrSubcommand()
         {
         }
 
-        public Subcommand(Primary app)
+        public AttrSubcommand(Primary app)
         {
             _app = app ?? throw new ArgumentNullException(nameof(app));
         }

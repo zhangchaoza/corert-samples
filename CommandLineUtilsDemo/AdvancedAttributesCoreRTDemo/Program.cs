@@ -34,7 +34,7 @@ namespace AdvancedAttributesCoreRTDemo
             ConfigureCommandLineApplication.Execute<Primary>(Constant.ConfigurePrimary, new string[] { "100" });
             Console.WriteLine("\n5.Subcommand");
             ConfigureCommandLineApplication.Execute<Primary>(Constant.ConfigurePrimary, new string[] {
-                "subcommand" ,
+                "attr-subcommand" ,
                 "2",
                 "-i:10",
                 "-b:true",
