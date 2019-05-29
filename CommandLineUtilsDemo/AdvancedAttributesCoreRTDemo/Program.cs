@@ -45,7 +45,22 @@ namespace AdvancedAttributesCoreRTDemo
                 "-s:CommandLineUtils in CoreRT",
                 "--mi:1",
                 "--mi:2"});
-
+            Console.WriteLine("\n6.Config Subcommand");
+            ConfigureCommandLineApplication.Execute<Primary>(Constant.ConfigurePrimary, new string[] {
+                "config" ,
+                "2",
+                "-i:10",
+                "-b:true",
+                "--ni:11",
+                "--nb:true",
+                "-e:7",
+                "--ne:5" ,
+                "-s:CommandLineUtils in CoreRT",
+                "--mi:1",
+                "--mi:2",
+                "-so:haha",
+                "-mo:1",
+                "-mo:2"});
             return 0;
         }
 

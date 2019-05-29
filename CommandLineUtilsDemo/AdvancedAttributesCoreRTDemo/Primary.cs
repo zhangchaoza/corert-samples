@@ -17,7 +17,6 @@ namespace AdvancedAttributesCoreRTDemo
 
         }
 
-
         #region Arguments
 
         [Range(1, 3)]
@@ -64,14 +63,14 @@ namespace AdvancedAttributesCoreRTDemo
 
         private int OnExecute()
         {
-            WriteInfo();
+            Console.WriteLine($"IntArg:{IntArg}");
+            WriteInheritedOptionInfo();
 
             return 0;
         }
 
-        internal void WriteInfo()
+        internal void WriteInheritedOptionInfo()
         {
-            Console.WriteLine($"IntArg:{IntArg}");
             Console.WriteLine("Int:{0},BoolValue:{1},EnumValue:{2},NullableInt:{3},NullableBoolValue:{4},NullableEnum:{5}",
                 Int,
                 BoolValue,
@@ -103,6 +102,9 @@ namespace AdvancedAttributesCoreRTDemo
 
         #endregion
 
+        /// <summary>
+        /// 不使用app.Conventions.UseConstructorInjection时AttrSubcommand必须包含无参构造函数
+        /// </summary>
         public AttrSubcommand()
         {
         }
@@ -115,7 +117,9 @@ namespace AdvancedAttributesCoreRTDemo
         private int OnExecute()
         {
             Console.WriteLine("Subcommand OnExecute");
-            _app.WriteInfo();
+
+            Console.WriteLine($"IntArg:{IntArg}");
+            _app?.WriteInheritedOptionInfo();
 
             return 0;
         }

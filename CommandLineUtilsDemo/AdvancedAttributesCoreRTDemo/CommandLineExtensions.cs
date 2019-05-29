@@ -25,20 +25,19 @@ namespace AdvancedAttributesCoreRTDemo
 
 
                     // app.Conventions.UseDefaultConventions();
-                    // // UseDefaultConventions list
+                    // UseDefaultConventions list
                     app.Conventions
                         .UseAttributes()
                         .SetAppNameFromEntryAssembly()
-                        // .SetRemainingArgsPropertyOnModel()
+                        .SetRemainingArgsPropertyOnModel()
                         .SetSubcommandPropertyOnModel()
-                        // .SetParentPropertyOnModel()
+                        .SetParentPropertyOnModel()
                         .UseOnExecuteMethodFromModel()
-                        // .UseOnValidateMethodFromModel()
-                        // .UseOnValidationErrorMethodFromModel()
-                        // .UseConstructorInjection()
+                        .UseOnValidateMethodFromModel()
+                        .UseOnValidationErrorMethodFromModel()
+                        .UseConstructorInjection()//不使用时AttrSubcommand必须包含无参构造函数
                         .UseDefaultHelpOption()
-                        .UseCommandNameFromModelType()
-                        ;
+                        .UseCommandNameFromModelType();
 
                     // app.Conventions.UseConstructorInjection(services);
                     // app.Conventions.UseConstructorInjection();

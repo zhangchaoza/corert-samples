@@ -7,12 +7,19 @@ namespace AdvancedAttributesCoreRTDemo
     [HelpOption("-h|--help", Description = "显示帮助", Inherited = false)]
     public class SubCommand1
     {
-        // private readonly Primary app;
+        private readonly Primary _app;
 
-        // public SubCommand1(Primary app)
-        // {
-        //     this.app = app;
-        // }
+        /// <summary>
+        /// 不使用app.Conventions.UseConstructorInjection时SubCommand1必须包含无参构造函数
+        /// </summary>
+        public SubCommand1()
+        {
+        }
+
+        public SubCommand1(Primary app)
+        {
+            _app = app ?? throw new ArgumentNullException(nameof(app));
+        }
 
         public Primary Parent { get; set; }
 
@@ -36,10 +43,7 @@ namespace AdvancedAttributesCoreRTDemo
 
         private int OnExecute()
         {
-            // if (app.IsVerbose)
-            // {
-            //     Console.WriteLine("开始执行SubCommand1");
-            // }
+            Console.WriteLine("SubCommand1.OnExecute");
 
             if (Count.HasValue)
             {
@@ -55,11 +59,9 @@ namespace AdvancedAttributesCoreRTDemo
                 Console.WriteLine($"so:{SingleOption},mo:{string.Join(",", MultipleOption)}");
             }
 
-            // if (app.IsVerbose)
-            // {
-            //     Console.WriteLine("完成执行SubCommand1");
-            // }
-            return 1;
+            _app?.WriteInheritedOptionInfo();
+
+            return 0;
         }
     }
 }
