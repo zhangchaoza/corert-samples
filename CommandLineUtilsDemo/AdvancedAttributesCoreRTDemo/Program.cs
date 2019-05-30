@@ -61,6 +61,10 @@ namespace AdvancedAttributesCoreRTDemo
                 "-so:haha",
                 "-mo:1",
                 "-mo:2"});
+            Console.WriteLine("7.Version");
+            ConfigureCommandLineApplication.Execute<Primary>(Constant.ConfigurePrimary, new string[] { "--version" });
+            Console.WriteLine("8.Subcommand Help");
+            ConfigureCommandLineApplication.Execute<Primary>(Constant.ConfigurePrimary, new string[] { "config", "-h" });
             return 0;
         }
 

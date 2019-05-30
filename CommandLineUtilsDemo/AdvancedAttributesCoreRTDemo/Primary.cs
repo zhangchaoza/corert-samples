@@ -1,20 +1,28 @@
 namespace AdvancedAttributesCoreRTDemo
 {
     using McMaster.Extensions.CommandLineUtils;
+    using Microsoft.Extensions.Logging;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Reflection;
 
-    [HelpOption("-h|--help", Description = "显示帮助", Inherited = false)]
-    [VersionOptionFromMember("--version", MemberName = nameof(Version), Description = "显示版本号", Inherited = false)]
+    [HelpOption("-h|--help|--get-help", Description = "显示帮助", Inherited = false)]
+    // [VersionOption(version: "1.0.1")]
+    [VersionOptionFromMember("--version", MemberName = nameof(VersionFromMember), Description = "显示版本号", Inherited = false)]
     [Subcommand(typeof(AttrSubcommand))]
     public class Primary
     {
+        private readonly ILogger<Primary> logger;
 
         public Primary()
         {
 
+        }
+
+        public Primary(ILogger<Primary> logger)
+        {
+            this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         #region Arguments
@@ -27,7 +35,7 @@ namespace AdvancedAttributesCoreRTDemo
 
         #region Options
 
-        public string Version => $"版本号：{ typeof(Primary).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion}";
+        public string VersionFromMember => $"版本号：{ typeof(Primary).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion}";
 
         /// <summary>
         /// 设置CommandOptionType.SingleValue测试GetParser
@@ -87,41 +95,6 @@ namespace AdvancedAttributesCoreRTDemo
             {
                 Console.WriteLine($"\t[{i}]:{MutiIntValues[i]}");
             }
-        }
-    }
-
-    public class AttrSubcommand
-    {
-        private readonly Primary _app;
-
-        #region Arguments
-
-        [Range(1, 3)]
-        [Argument(order: 0, name: "intArg", description: "Int Argument")]
-        public int? IntArg { get; set; }
-
-        #endregion
-
-        /// <summary>
-        /// 不使用app.Conventions.UseConstructorInjection时AttrSubcommand必须包含无参构造函数
-        /// </summary>
-        public AttrSubcommand()
-        {
-        }
-
-        public AttrSubcommand(Primary app)
-        {
-            _app = app ?? throw new ArgumentNullException(nameof(app));
-        }
-
-        private int OnExecute()
-        {
-            Console.WriteLine("Subcommand OnExecute");
-
-            Console.WriteLine($"IntArg:{IntArg}");
-            _app?.WriteInheritedOptionInfo();
-
-            return 0;
         }
     }
 

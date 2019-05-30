@@ -3,6 +3,8 @@ namespace AdvancedAttributesCoreRTDemo
     using System;
     using McMaster.Extensions.CommandLineUtils;
     using McMaster.Extensions.CommandLineUtils.Conventions;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
     // using Microsoft.Extensions.DependencyInjection;
     // using Microsoft.Extensions.Logging;
 
@@ -14,20 +16,19 @@ namespace AdvancedAttributesCoreRTDemo
             {
                 using (var app = new CommandLineApplication<T>(throwOnUnexpectedArg: true))
                 {
-                    // var services = new ServiceCollection()
-                    //     .AddLogging(logging =>
-                    //     {
-                    //         logging.AddConsole();
-                    //         logging.AddDebug();
-                    //         logging.SetMinimumLevel(LogLevel.Debug);
-                    //     })
-                    //     .BuildServiceProvider();
-
+                    var services = new ServiceCollection()
+                        .AddLogging(logging =>
+                        {
+                            logging.AddConsole();
+                            logging.AddDebug();
+                            logging.SetMinimumLevel(LogLevel.Information);
+                        })
+                        .BuildServiceProvider();
 
                     // app.Conventions.UseDefaultConventions();
                     // UseDefaultConventions list
                     app.Conventions
-                        .UseAttributes()
+                        // .UseAttributes()
                         .SetAppNameFromEntryAssembly()
                         .SetRemainingArgsPropertyOnModel()
                         .SetSubcommandPropertyOnModel()
@@ -35,30 +36,28 @@ namespace AdvancedAttributesCoreRTDemo
                         .UseOnExecuteMethodFromModel()
                         .UseOnValidateMethodFromModel()
                         .UseOnValidationErrorMethodFromModel()
-                        .UseConstructorInjection()//不使用时AttrSubcommand必须包含无参构造函数
+                        // .UseConstructorInjection()//不使用时AttrSubcommand必须包含无参构造函数
                         .UseDefaultHelpOption()
-                        .UseCommandNameFromModelType();
+                        .UseCommandNameFromModelType()
+                    ;
 
-                    // app.Conventions.UseConstructorInjection(services);
-                    // app.Conventions.UseConstructorInjection();
+                    // 自定容器
+                    app.Conventions
+                        .UseConstructorInjection(services);
 
-                    // app.Conventions
-                    // .AddConvention(new AttributeConvention())
-                    // .UseCommandAttribute()
-                    // .UseVersionOptionFromMemberAttribute()
-                    // .UseVersionOptionAttribute()
-                    // .UseHelpOptionAttribute()
-                    // .UseOptionAttributes()
-                    // .UseArgumentAttributes()
-                    // .UseSubcommandAttributes()
-                    // .SetAppNameFromEntryAssembly()
-                    // .SetRemainingArgsPropertyOnModel()
-                    // .SetSubcommandPropertyOnModel()
-                    // .SetParentPropertyOnModel()
-                    // .UseOnExecuteMethodFromModel()
-                    // .UseOnValidateMethodFromModel()
-                    // .UseOnValidationErrorMethodFromModel()
-                    // .UseDefaultHelpOption();
+                    // // 自定Convention
+                    // app.Conventions.AddConvention(new AttributeConvention());
+
+                    // UseAttributes list
+                    app.Conventions
+                        .UseCommandAttribute()
+                        .UseVersionOptionFromMemberAttribute()// 包含在UseAttributes中，不能重复设置
+                        .UseVersionOptionAttribute()// 包含在UseAttributes中，不能重复设置
+                        .UseHelpOptionAttribute()// 会覆盖UseDefaultHelpOption,包含在UseAttributes中，不能重复设置
+                        .UseOptionAttributes()// 包含在UseAttributes中，不能重复设置
+                        .UseArgumentAttributes()// 包含在UseAttributes中，不能重复设置
+                        .UseSubcommandAttributes()// 包含在UseAttributes中，不能重复设置
+                    ;
 
                     configure(app);
                     return app.Execute(args);
