@@ -42,21 +42,25 @@ namespace CommandlineApiDemo
 
             var optionThatTakesInt = new Option(
                alias: "--int-option",
-               description: "An option whose argument is parsed as an int",
-               argument: new Argument<int>(defaultValue: 42)
-               {
-                   Arity = ArgumentArity.ExactlyOne
-               },
-               isHidden: default);
+               description: "An option whose argument is parsed as an int")
+            {
+                Argument = new Argument<int>(() => 42)
+                {
+                    Arity = ArgumentArity.ExactlyOne
+                },
+                IsHidden = false
+            };
             optionThatTakesInt.AddAlias("-i");
 
             var optionThatTakesBool = new Option(
                 "--bool-option",
-                "An option whose argument is parsed as a bool",
-                new Argument<bool>()
+                "An option whose argument is parsed as a bool")
+            {
+                Argument = new Argument<bool>()
                 {
                     Arity = ArgumentArity.ZeroOrOne
-                });
+                }
+            };
             optionThatTakesInt.AddAlias("-b");
 
             Console.WriteLine("rootcommand ctor");
@@ -96,31 +100,36 @@ namespace CommandlineApiDemo
             // Create some options and a parser
             var optionThatTakesInt = new Option(
                alias: "--int-option",
-               description: "An option whose argument is parsed as an int[]",
-               argument: new Argument<int[]>(defaultValue: new int[] { 1, 2, 3 })
-               {
-                   Arity = ArgumentArity.OneOrMore
-               },
-               isHidden: default);
+               description: "An option whose argument is parsed as an int[]")
+            {
+                Argument = new Argument<int[]>(() => new int[] { 1, 2, 3 })
+                {
+                    Arity = ArgumentArity.OneOrMore
+                },
+                IsHidden = false
+            };
             optionThatTakesInt.AddAlias("-i");
 
             var optionThatTakesBool = new Option(
                 "--bool-option",
-                "An option whose argument is parsed as a bool",
-                new Argument<bool>()
+                "An option whose argument is parsed as a bool")
+            {
+                Argument = new Argument<bool>()
                 {
                     Arity = ArgumentArity.ZeroOrOne
-                });
+                }
+            };
             optionThatTakesBool.AddAlias("-b");
 
             var optionThatTakesFileInfo = new Option(
                 "--file-option",
-                "An option whose argument is parsed as a FileInfo",
-                new Argument<FileInfo>()
+                "An option whose argument is parsed as a FileInfo")
+            {
+                Argument = new Argument<FileInfo>()
                 {
                     Arity = ArgumentArity.ExactlyOne
-                });
-
+                }
+            };
 
             // Add them to the root command
             // var rootCommand = new RootCommand();
@@ -143,18 +152,21 @@ namespace CommandlineApiDemo
             // return rootCommand.InvokeAsync(new string[] { "-b" }).GetAwaiter().GetResult();
             // return rootCommand.InvokeAsync(new string[] { "-i:1", "-i:2", "-b" }).GetAwaiter().GetResult();
 
-            var subcommand = new Command("subcommand");
+            // command缺少description时在help中不出现
+            var subcommand = new Command("subcommand", "a subcommand");
             subcommand.AddOption(new Option(
                 aliases: new string[] { "--i-op" },
-                description: "An option whose argument is parsed as an int",
-                argument: new Argument<int>()
+                description: "An option whose argument is parsed as an int")
+            {
+                Argument = new Argument<int>()
                 {
                     Arity = ArgumentArity.ExactlyOne
-                }));
-            subcommand.Handler = CommandHandler.Create<int>((iOption) =>
-            {
-                Console.WriteLine($"subcommand : {iOption}");
+                }
             });
+            subcommand.Handler = CommandHandler.Create<int>((iOption) =>
+                {
+                    Console.WriteLine($"subcommand : {iOption}");
+                });
 
             Console.WriteLine("inited");
 

@@ -24,12 +24,7 @@ namespace CommandlineApiDemo
             ICommandHandler handler = null,
             bool isHidden = false) :
             base(ExeName,
-                 description,
-                 symbols,
-                 argument,
-                 treatUnmatchedTokensAsErrors,
-                 handler,
-                 isHidden)
+                 description)
         {
         }
 
