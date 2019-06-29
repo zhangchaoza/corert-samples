@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.CommandLine;
-using System.CommandLine.Builder;
-using System.CommandLine.Invocation;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace CommandlineApiDemo
+﻿namespace CommandlineApiDemo
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.CommandLine;
+    using System.CommandLine.Builder;
+    using System.CommandLine.Invocation;
+    using System.IO;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     class Program
     {
 
@@ -21,28 +19,41 @@ namespace CommandlineApiDemo
             RunTest("(=参数分隔)", SimpletMethod, "-i=123", "-b");
             RunTest("(空格参数分隔)", SimpletMethod, "-i", "123", "-b");
 
-            RunTest("custom", MiddlewarePipeline, "[just-say-hi]", "[just-say-hi2]", "-i=3", "-i=4");
-            RunTest("nomal", MiddlewarePipeline, "-i=3", "-i=4", "-b", "--file-option=file.txt");
+            RunTest("custom", MiddlewarePipeline, "[command:12:23:34]", "[just-say-hi]", "[just-say-hi2]", "playground_arg", "abc", "100", "-i=3", "-i=4");
+            RunTest("nomal", MiddlewarePipeline, "playground_arg", "abc", "100", "-i=3", "-i=4", "-b", "--file-option=file.txt");
+            RunTest("ResponseFileHandling", MiddlewarePipeline, "playground_arg", "abc", "100", "-i=3", "-i=4", "-b", "--file-option=file.txt", "@response_line.txt");
+            RunTest("ResponseFileHandling", MiddlewarePipeline, "playground_arg", "abc", "100", "-i=3", "-i=4", "-b", "--file-option=file.txt", "@response_space.txt");
             RunTest("help", MiddlewarePipeline, "-h");
             RunTest("version", MiddlewarePipeline, "--version");
             RunTest("parse-error", MiddlewarePipeline, "[parse]", "--int-option=not-an-int", "--file-option=file.txt");
-            RunTest("parse-right", MiddlewarePipeline, "[parse]", "-i=3", "-i=4", "-b", "--file-option=file.txt");
-            RunTest("subcommand", MiddlewarePipeline, "subcommand");
+            RunTest("parse-error report", MiddlewarePipeline, "--int-option=not-an-int", "--file-option=file.txt");
+            RunTest("parse-right", MiddlewarePipeline, "[parse]", "playground_arg", "abc", "100", "-i=3", "-i=4", "-b", "--file-option=file.txt");
+            RunTest("Simple result", MiddlewarePipeline, "[Simple]", "playground_arg", "abc", "100", "-i=3", "-i=4", "-b", "--file-option=file.txt");
+
+            RunTest("subcommand help", MiddlewarePipeline, "sub2", "-h");
+            RunTest("subcommand", MiddlewarePipeline, "playground_arg", "abc", "100", "subcommand", "10", "--i-op=10");
+            RunTest("subcommand Alias", MiddlewarePipeline, "playground_arg", "abc", "100", "sub", "qwe", "--i-op=10");
+            RunTest("subcommand Exception", MiddlewarePipeline, "playground_arg", "abc", "100", "errorcommand");
+            RunTest("subcommand Typo Corrections", MiddlewarePipeline, "playground_arg", "abc", "100", "--file-options=1");
+            RunTest("suggest1", MiddlewarePipeline, "[suggest]", "h");// suggest指令参数缺省为0
+            RunTest("suggest2", MiddlewarePipeline, "[suggest]", "wor");
+            RunTest("suggest3", MiddlewarePipeline, "[suggest]", "suggest");
+            RunTest("suggest4", MiddlewarePipeline, "[suggest:5]", "abc subs ge");// suggest参数将在字符串索引处取单词
 
             // corert编译后程序不支持dotnet core attach
             // RunTest("debug", MiddlewarePipeline, "[debug]", "-i=3", "-i=4");
 
-            Console.WriteLine("\n任意键退出");
-            Console.ReadLine();
+            // Console.WriteLine("\n任意键退出");
+            // Console.ReadLine();
         }
 
-        static int SimpletMethod(params string[] args)
+        private static int SimpletMethod(params string[] args)
         {
             Console.WriteLine("test");
 
             var optionThatTakesInt = new Option(
-               alias: "--int-option",
-               description: "An option whose argument is parsed as an int")
+                alias: "--int-option",
+                description: "An option whose argument is parsed as an int")
             {
                 Argument = new Argument<int>(() => 42)
                 {
@@ -88,19 +99,18 @@ namespace CommandlineApiDemo
 
             var parse = new CommandLineBuilder(rootCommand).Build();
             var pr = parse.Parse(args);
-            var context = new InvocationContext(pr);
+            var context = new InvocationContext(pr, new SystemConsole());
             rootCommand.Handler.InvokeAsync(context).GetAwaiter().GetResult();
-
 
             return 0;
         }
 
-        static int MiddlewarePipeline(params string[] args)
+        private static int MiddlewarePipeline(params string[] args)
         {
             // Create some options and a parser
             var optionThatTakesInt = new Option(
-               alias: "--int-option",
-               description: "An option whose argument is parsed as an int[]")
+                alias: "--int-option",
+                description: "An option whose argument is parsed as an int[]")
             {
                 Argument = new Argument<int[]>(() => new int[] { 1, 2, 3 })
                 {
@@ -110,9 +120,11 @@ namespace CommandlineApiDemo
             };
             optionThatTakesInt.AddAlias("-i");
 
+            // optionThatTakesInt.
+
             var optionThatTakesBool = new Option(
-                "--bool-option",
-                "An option whose argument is parsed as a bool")
+                alias: "--bool-option",
+                description: "An option whose argument is parsed as a bool")
             {
                 Argument = new Argument<bool>()
                 {
@@ -122,8 +134,8 @@ namespace CommandlineApiDemo
             optionThatTakesBool.AddAlias("-b");
 
             var optionThatTakesFileInfo = new Option(
-                "--file-option",
-                "An option whose argument is parsed as a FileInfo")
+                alias: "--file-option",
+                description: "An option whose argument is parsed as a FileInfo")
             {
                 Argument = new Argument<FileInfo>()
                 {
@@ -133,27 +145,186 @@ namespace CommandlineApiDemo
 
             // Add them to the root command
             // var rootCommand = new RootCommand();
-            var rootCommand = new RootCommandRT();
-            rootCommand.Description = "My sample app";
-            rootCommand.AddOption(optionThatTakesInt);
-            rootCommand.AddOption(optionThatTakesBool);
-            rootCommand.AddOption(optionThatTakesFileInfo);
+            var rootCommand = new RootCommandRT("My sample app");
+            rootCommand.AddAlias("pgapp");
 
-            rootCommand.Handler = CommandHandler.Create<int[], bool, FileInfo>((intOption, boolOption, fileOption) =>
+            // rootCommand.AddOption(optionThatTakesInt);
+            // rootCommand.AddOption(optionThatTakesBool);
+            // rootCommand.AddOption(optionThatTakesFileInfo);
+
+            // ※ Argument顺序重要
+            Argument argument = new Argument()
             {
+                ArgumentType = typeof(string),
+                Description = "默认参数"
+            };
+            // Suggest信息会显示在help中,并且会覆盖argument.name
+            argument.AddSuggestions(new ReadOnlyCollection<string>(new List<string>
+            {
+                "Suggest1",
+                "Suggest2",
+                "substring suggest"
+            }));
+            rootCommand.AddArgument(argument);
+            Argument<string> argument1 = new Argument<string>("arg1")
+            {
+                Description = "string参数"
+            };
+            argument1.AddSuggestionSource(new SimpleSuggestSource());
+            rootCommand.AddArgument(argument1);
+            Argument<int> argument2 = new Argument<int>("arg2");
+            argument2.AddSuggestionSource(textToMatch =>
+            {
+                // Console.WriteLine($"textToMatch:\u001b[31m{textToMatch}\u001b[0m");
+                return new string[]
+                {
+                    "world"
+                };
+            });
+            rootCommand.AddArgument(argument2);
+
+            // ※ handler中可以乱序
+            rootCommand.Handler = CommandHandler.Create<string, int, string, int[], bool, FileInfo>((playground, arg2, arg1, intOption, boolOption, fileOption) =>
+            {
+                Console.WriteLine("Arguments:");
+                Console.WriteLine($"\tplayground:{playground}");
+                Console.WriteLine($"\targ1:{arg1}");
+                Console.WriteLine($"\targ2:{arg2}");
+
+                Console.WriteLine("Options:");
                 foreach (var item in intOption)
                 {
-                    Console.WriteLine($"The value for --int-option is: {item}");
+                    Console.WriteLine($"\tThe value for --int-option is: {item}");
                 }
-                Console.WriteLine($"The value for --bool-option is: {boolOption}");
-                Console.WriteLine($"The value for --file-option is: {fileOption?.FullName ?? "null"}");
+                Console.WriteLine($"\tThe value for --bool-option is: {boolOption}");
+                Console.WriteLine($"\tThe value for --file-option is: {fileOption?.FullName ?? "null"}");
             });
+
+            // rootCommand.Handler = CommandHandler.Create((IConsole console, CancellationToken token) =>
+            // {
+            //     return 0;
+            // });
 
             // return rootCommand.InvokeAsync(new string[] { "-b" }).GetAwaiter().GetResult();
             // return rootCommand.InvokeAsync(new string[] { "-i:1", "-i:2", "-b" }).GetAwaiter().GetResult();
 
+            // Console.WriteLine("inited");
+
+            var builder = new CommandLineBuilder(rootCommand)
+                .AddCommand(BuildSubcommand())
+                .AddCommand(BuildErrorSubcommand())
+                .AddOption(optionThatTakesInt)
+                .AddOption(optionThatTakesBool)
+                .AddOption(optionThatTakesFileInfo)
+
+                .EnablePositionalOptions(value: true)/* 无用 */
+
+                .EnablePosixBundling(value: true)/*  对无值option生效，-b */
+
+                // .ParseResponseFileAs(responseFileHandling: ResponseFileHandling.ParseArgsAsLineSeparated) /*  添加@起始参数，从文件读取命令 */
+                .ParseResponseFileAs(responseFileHandling: ResponseFileHandling.ParseArgsAsSpaceSeparated)
+                // .UseDefaults()
+                // // .UseVersionOption()
+                // // .UseHelp()
+                // // .UseParseDirective()
+                // // .UseDebugDirective()
+                // // .UseSuggestDirective()
+                // // .RegisterWithDotnetSuggest()
+                // // .UseTypoCorrections()
+                // // .UseParseErrorReporting()
+                // // .UseExceptionHandler()
+                // // .CancelOnProcessTermination()
+                /* 自定义帮助信息输出类 */
+                .UseHelpBuilder(context =>
+                {
+                    return new HelpBuilder(context.Console);
+                })
+                .UsePrefixes(prefixes: new ReadOnlyCollection<string>(new List<string> { "--", "-", "/" })) // 定义option标识符
+
+                .UseVersionOption() // 版本号选项，--version
+
+                .CancelOnProcessTermination() // 控制台ctrl+c取消事件
+
+                // 设置console
+                .ConfigureConsole(context =>
+                {
+                    return context.Console;
+                })
+                .RegisterWithDotnetSuggest() // 需要安装dotnet-suggest
+
+                .UseDebugDirective() // 使用[debug]指令
+
+                // 命令异常处理
+                .UseExceptionHandler((ex, context) =>
+                {
+                    context.Console.Error.WriteLine($"ExceptionHandler<{ex.GetType()}>:\u001b[31m{ex.Message}\u001b[0m");
+                })
+                // .UseHelp()/* help中间件优先级为4级 */
+                .UseHelp(helpOptionTokens: new ReadOnlyCollection<string>(new List<string> { "-h", "/h", "--help", "-?", "/?" }))
+                /* 普通中间件优先级为6级 */
+                .UseMiddleware(context =>
+                {
+                    // 默认执行后续中间件
+                    if (context.ParseResult.Directives.TryGetValues("command", out IEnumerable<string> value))
+                    {
+                        Console.WriteLine(string.Join(',', value.ToArray()));
+                    }
+                })
+                .UseMiddleware(async (context, next) =>
+                {
+                    // 选择执行后续中间件
+                    if (context.ParseResult.Directives.Contains("just-say-hi"))
+                    {
+                        context.Console.Out.WriteLine("Hi!");
+                        if (context.ParseResult.Directives.Contains("just-say-hi2"))
+                        {
+                            context.Console.Out.WriteLine("Hi2!");
+                        }
+                    }
+                    else
+                    {
+                        await next(context);
+                    }
+                })
+                .UseMiddleware(async (context, next) =>
+                {
+                    if (context.ParseResult.Directives.Contains("Simple"))
+                    {
+                        context.InvocationResult = new SimpleResult();
+                    }
+                    await next(context);
+                })
+                .UseParseDirective()
+                // 当解析失败直接返回，不会执行设置的中间件
+                .UseParseErrorReporting()
+
+                // 拼写错误提示
+                // 0.3.0-alpha.19317.1 bug command有参数时异常 https://github.com/dotnet/command-line-api/issues/578
+                .UseTypoCorrections()
+
+                // 显示argument添加的suggest，并通过指令参数搜索
+                // 指令参数表示搜索的字符串索引处单个单词
+                // 指令参数缺省为0
+                .UseSuggestDirective()
+                .Build();
+
+            // Console.WriteLine("created");
+            return builder.InvokeAsync(args).Result;
+        }
+
+        private static Command BuildSubcommand()
+        {
             // command缺少description时在help中不出现
             var subcommand = new Command("subcommand", "a subcommand");
+
+            subcommand.AddAlias("sub");
+            subcommand.AddAlias("sub2");
+
+            subcommand.AddArgument(new Argument<string>("sub_arg1")
+            {
+                Description = "sub string参数"
+            });
+
             subcommand.AddOption(new Option(
                 aliases: new string[] { "--i-op" },
                 description: "An option whose argument is parsed as an int")
@@ -163,43 +334,38 @@ namespace CommandlineApiDemo
                     Arity = ArgumentArity.ExactlyOne
                 }
             });
-            subcommand.Handler = CommandHandler.Create<int>((iOption) =>
-                {
-                    Console.WriteLine($"subcommand : {iOption}");
-                });
-
-            Console.WriteLine("inited");
-
-            var builder = new CommandLineBuilder(rootCommand)
-            .AddCommand(subcommand)
-            .UseHelp()
-            .UseVersionOption()
-            .UseDebugDirective()
-            .UseParseDirective()
-            .UseMiddleware(async (context, next) =>
+            subcommand.Handler = CommandHandler.Create<int, string, string, string>((iop, playground, arg1, sub_arg1) =>
             {
-                if (context.ParseResult.Directives.Contains("just-say-hi"))
-                {
-                    context.Console.Out.WriteLine("Hi!");
-                    if (context.ParseResult.Directives.Contains("just-say-hi2"))
-                    {
-                        context.Console.Out.WriteLine("Hi2!");
-                    }
-                }
-                else
-                {
-                    await next(context);
-                }
-            }).Build();
+                Console.WriteLine("subcommand Arguments:");
+                Console.WriteLine($"\tplayground:{playground}");
+                Console.WriteLine($"\targ1:{arg1}");
+                Console.WriteLine($"\tsub_arg1:{sub_arg1}");
 
-            Console.WriteLine("created");
-            return builder.InvokeAsync(args).Result;
+                Console.WriteLine("subcommand Options:");
+                Console.WriteLine($"\t--i-op: {iop}");
+            });
+
+            return subcommand;
+        }
+
+        private static Command BuildErrorSubcommand()
+        {
+            // command缺少description时在help中不出现
+            var subcommand = new Command("errorcommand", "a error subcommand");
+
+            subcommand.Handler = CommandHandler.Create(() =>
+            {
+                return Task.FromException(new NotImplementedException());
+            });
+
+            return subcommand;
         }
 
         #region Run A Test Method
 
-        delegate int TestMethod(params string[] args);
-        static void RunTest(string name, TestMethod method, params string[] args)
+        private delegate int TestMethod(params string[] args);
+
+        private static void RunTest(string name, TestMethod method, params string[] args)
         {
             var mainName = method.Method.Name;
             if (!string.IsNullOrEmpty(name))
@@ -210,11 +376,12 @@ namespace CommandlineApiDemo
 
             Console.WriteLine(mainName.PadRight(50, '='));
 
-            method(args);
+            var result = method(args);
 
             Console.WriteLine();
+            Console.WriteLine($"exit code:{result}");
         }
 
-        #endregion
+        #endregion Run A Test Method
     }
 }
