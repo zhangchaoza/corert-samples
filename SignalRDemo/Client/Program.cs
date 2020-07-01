@@ -13,7 +13,7 @@ namespace Client
             HubConnection connection = new HubConnectionBuilder()
                 .WithUrl("http://localhost:8080/consolehub")
                 .Build();
-connection.Closed
+
             connection.On<string, string>("ReceiveMessage", (user, message) =>
             {
                 Console.WriteLine($"server: {user}: {message}");

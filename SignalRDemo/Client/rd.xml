@@ -10,9 +10,9 @@
             <Type Name="Common.Message,Common" Dynamic="Required All" />
         </Assembly>
 
-        <Assembly Name="Microsoft.AspNetCore.SignalR.Client">
+        <!-- <Assembly Name="Microsoft.AspNetCore.SignalR.Client">
             <Type Name="Microsoft.AspNetCore.SignalR.Client.HttpConnectionFactory" Dynamic="Required All" />
-        </Assembly>
+        </Assembly> -->
 
         <Assembly Name="Microsoft.AspNetCore.SignalR.Client.Core">
             <Type Name="Microsoft.AspNetCore.SignalR.Client.HubConnection" Dynamic="Required All" />

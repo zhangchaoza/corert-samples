@@ -23,13 +23,13 @@ namespace Server
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            // services.AddCors(options => options.AddPolicy("CorsPolicy",
-            //     builder =>
-            //     {
-            //         builder.AllowAnyMethod().AllowAnyHeader()
-            //                .WithOrigins("http://localhost:55830")
-            //                .AllowCredentials();
-            //     }));
+            services.AddCors(options => options.AddPolicy("CorsPolicy",
+                builder =>
+                {
+                    builder.AllowAnyMethod().AllowAnyHeader()
+                        //    .WithOrigins("http://localhost:55830")
+                           .AllowCredentials();
+                }));
 
             services.AddSignalR();
         }
