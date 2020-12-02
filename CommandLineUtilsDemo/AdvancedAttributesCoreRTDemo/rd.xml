@@ -8,7 +8,7 @@
 
         <!-- <Assembly Name="McMaster.Extensions.CommandLineUtils" Dynamic="Required All">
             <Type Name="McMaster.Extensions.CommandLineUtils.Abstractions.IValueParser" Dynamic="Required All">
-                <Type Name="McMaster.Extensions.CommandLineUtils.Abstractions.IValueParser`1[[System.Nullable`1[[System.Int32,System.Private.CoreLib]],System.Private.CoreLib]]" Dynamic="Required All"/>
+                <Type Name="McMaster.Extensions.CommandLineUtils.Abstractions.IValueParser`1[[System.Nullable`1[[System.Int32,System.Private.CoreLib]],System.Private.CoreLib]]" Dynamic="Required All" />
             </Type>
         </Assembly> -->
 
@@ -20,6 +20,5 @@
                 </Method>
             </Type>
         </Assembly> -->
-
     </Application>
 </Directives>

@@ -1,4 +1,4 @@
-using System.Reflection;
+﻿using System.Reflection;
 using System.Threading.Tasks;
 using BuilderApiCoreRTDemo.SubCommands;
 using CommandLineUtils.Abstracttions;
@@ -8,8 +8,8 @@ namespace BuilderApiCoreRTDemo
 {
     public class MainCommand : BaseAsyncMainCommandLineApp
     {
-        public MainCommand(string name, string fullName, string description, string extendedHelpText = null, bool throwOnUnexpectedArg = true)
-            : base(name, fullName, description, extendedHelpText, throwOnUnexpectedArg)
+        public MainCommand(string name, string fullName, string description, string extendedHelpText = null)
+            : base(name, fullName, description, extendedHelpText)
         {
         }
 

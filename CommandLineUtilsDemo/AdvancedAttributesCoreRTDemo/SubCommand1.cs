@@ -1,7 +1,8 @@
-namespace AdvancedAttributesCoreRTDemo
+﻿namespace AdvancedAttributesCoreRTDemo
 {
-    using McMaster.Extensions.CommandLineUtils;
     using System;
+    using McMaster.Extensions.CommandLineUtils;
+
     // using System.ComponentModel.DataAnnotations;
 
     [HelpOption("-h|--help", Description = "显示帮助", Inherited = false)]

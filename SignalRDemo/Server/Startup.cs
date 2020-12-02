@@ -1,11 +1,11 @@
-namespace Server
+﻿namespace Server
 {
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.SignalR;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -27,7 +27,7 @@ namespace Server
                 builder =>
                 {
                     builder.AllowAnyMethod().AllowAnyHeader()
-                        //    .WithOrigins("http://localhost:55830")
+                           //    .WithOrigins("http://localhost:55830")
                            .AllowCredentials();
                 }));
 

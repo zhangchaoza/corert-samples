@@ -1,9 +1,8 @@
-namespace CommandLineUtils
+﻿namespace CommandLineUtils
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using McMaster.Extensions.CommandLineUtils;
 
     public static class ArgumentParser
     {

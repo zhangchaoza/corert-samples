@@ -1,13 +1,10 @@
-namespace CommandLineUtils.Abstracttions
+﻿namespace CommandLineUtils.Abstracttions
 {
-    using McMaster.Extensions.CommandLineUtils;
     using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
+    using McMaster.Extensions.CommandLineUtils;
 
     public abstract class BaseSubCommandLineApp : BaseApplcation
     {
-
         private CommandLineApplication _app;
 
         protected override CommandLineApplication App => _app;
@@ -18,17 +15,17 @@ namespace CommandLineUtils.Abstracttions
             return this;
         }
 
-        internal protected virtual BaseSubCommandLineApp RegisterArguments()
+        protected internal virtual BaseSubCommandLineApp RegisterArguments()
         {
             return this;
         }
 
-        internal protected virtual BaseSubCommandLineApp RegisterSubApps()
+        protected internal virtual BaseSubCommandLineApp RegisterSubApps()
         {
             return this;
         }
 
-        internal protected virtual BaseSubCommandLineApp RegisterOptions()
+        protected internal virtual BaseSubCommandLineApp RegisterOptions()
         {
             return this;
         }
@@ -50,11 +47,11 @@ namespace CommandLineUtils.Abstracttions
 
                     if (subapp is BaseAsyncSubCommandLineApp)
                     {
-                        subcla.OnExecute(new Func<Task<int>>(() =>
+                        subcla.OnExecuteAsync(token =>
                         {
                             subapp.OnBeforeExecute();
                             return (subapp as BaseAsyncSubCommandLineApp).OnExecuteAsync();
-                        }));
+                        });
                     }
                     else
                     {
@@ -64,8 +61,7 @@ namespace CommandLineUtils.Abstracttions
                             return subapp.OnExecute();
                         }));
                     }
-                },
-                throwOnUnexpectedArg: subapp.ThrowOnUnexpectedArg);
+                });
             return subapp;
         }
 
@@ -74,11 +70,10 @@ namespace CommandLineUtils.Abstracttions
             return _app.Execute(args);
         }
 
-        internal protected virtual void OnBeforeExecute()
+        protected internal virtual void OnBeforeExecute()
         {
         }
 
-        internal protected abstract int OnExecute();
-
+        protected internal abstract int OnExecute();
     }
 }

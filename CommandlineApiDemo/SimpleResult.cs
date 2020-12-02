@@ -1,7 +1,7 @@
 ﻿namespace CommandlineApiDemo
 {
-    using System.CommandLine;
     using System.CommandLine.Invocation;
+    using System.CommandLine.IO;
 
     internal class SimpleResult : IInvocationResult
     {

@@ -1,14 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using Common;
 using Microsoft.AspNetCore.SignalR.Client;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace Client
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             HubConnection connection = new HubConnectionBuilder()
                 .WithUrl("http://localhost:8080/consolehub")

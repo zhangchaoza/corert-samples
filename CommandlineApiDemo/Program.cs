@@ -2,18 +2,19 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.CommandLine;
     using System.CommandLine.Builder;
+    using System.CommandLine.Help;
     using System.CommandLine.Invocation;
+    using System.CommandLine.IO;
+    using System.CommandLine.Parsing;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
-    class Program
+    internal class Program
     {
-
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             RunTest("(:参数分隔)", SimpletMethod, "-i:123", "-b");
             RunTest("(=参数分隔)", SimpletMethod, "-i=123", "-b");
@@ -159,21 +160,21 @@
                 Description = "默认参数"
             };
             // Suggest信息会显示在help中,并且会覆盖argument.name
-            argument.AddSuggestions(new ReadOnlyCollection<string>(new List<string>
+            argument.AddSuggestions(new string[]
             {
                 "Suggest1",
                 "Suggest2",
                 "substring suggest"
-            }));
+            });
             rootCommand.AddArgument(argument);
             Argument<string> argument1 = new Argument<string>("arg1")
             {
                 Description = "string参数"
             };
-            argument1.AddSuggestionSource(new SimpleSuggestSource());
+            argument1.Suggestions.Add(new SimpleSuggestSource());
             rootCommand.AddArgument(argument1);
             Argument<int> argument2 = new Argument<int>("arg2");
-            argument2.AddSuggestionSource(textToMatch =>
+            argument2.AddSuggestions((r, textToMatch) =>
             {
                 // Console.WriteLine($"textToMatch:\u001b[31m{textToMatch}\u001b[0m");
                 return new string[]
@@ -217,8 +218,6 @@
                 .AddOption(optionThatTakesBool)
                 .AddOption(optionThatTakesFileInfo)
 
-                .EnablePositionalOptions(value: true)/* 无用 */
-
                 .EnablePosixBundling(value: true)/*  对无值option生效，-b */
 
                 // .ParseResponseFileAs(responseFileHandling: ResponseFileHandling.ParseArgsAsLineSeparated) /*  添加@起始参数，从文件读取命令 */
@@ -239,7 +238,6 @@
                 {
                     return new HelpBuilder(context.Console);
                 })
-                .UsePrefixes(prefixes: new ReadOnlyCollection<string>(new List<string> { "--", "-", "/" })) // 定义option标识符
 
                 .UseVersionOption() // 版本号选项，--version
 
@@ -260,7 +258,6 @@
                     context.Console.Error.WriteLine($"ExceptionHandler<{ex.GetType()}>:\u001b[31m{ex.Message}\u001b[0m");
                 })
                 // .UseHelp()/* help中间件优先级为4级 */
-                .UseHelp(helpOptionTokens: new ReadOnlyCollection<string>(new List<string> { "-h", "/h", "--help", "-?", "/?" }))
                 /* 普通中间件优先级为6级 */
                 .UseMiddleware(context =>
                 {

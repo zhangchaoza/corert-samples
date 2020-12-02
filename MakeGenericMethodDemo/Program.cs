@@ -6,9 +6,9 @@ using System.Reflection;
 
 namespace MakeGenericMethodDemo
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             {
                 Console.WriteLine("\r\n--- Examine a generic method.");
@@ -78,7 +78,6 @@ namespace MakeGenericMethodDemo
             //     s_GetParserGeneric.Invoke(obj, new object[] { typeof(int), 1 });
             // }
         }
-
     }
 
     public static class Example
@@ -87,7 +86,6 @@ namespace MakeGenericMethodDemo
         {
             Console.WriteLine("\r\nHere it is: {0}", toDisplay);
         }
-
     }
 
     /// <summary>
@@ -104,7 +102,5 @@ namespace MakeGenericMethodDemo
         {
             Console.WriteLine("(2)Here it is:{0},{1}", typeof(T), toDisplay);
         }
-
     }
-
 }

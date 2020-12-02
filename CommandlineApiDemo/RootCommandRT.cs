@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.IO;
-using System.Reflection;
 
 namespace CommandlineApiDemo
 {
@@ -23,15 +22,8 @@ namespace CommandlineApiDemo
             bool treatUnmatchedTokensAsErrors = true,
             ICommandHandler handler = null,
             bool isHidden = false) :
-            base(ExeName,
-                 description)
+            base(ExeName, description)
         {
-        }
-
-        public override string Name
-        {
-            get => ExeName;
-            set => throw new NotSupportedException("The root command's name cannot be changed.");
         }
 
         private static readonly Lazy<string> executableName =

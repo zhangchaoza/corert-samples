@@ -1,10 +1,10 @@
-namespace AdvancedAttributesCoreRTDemo
+﻿namespace AdvancedAttributesCoreRTDemo
 {
     using System;
     using McMaster.Extensions.CommandLineUtils;
-    using McMaster.Extensions.CommandLineUtils.Conventions;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+
     // using Microsoft.Extensions.DependencyInjection;
     // using Microsoft.Extensions.Logging;
 
@@ -14,7 +14,7 @@ namespace AdvancedAttributesCoreRTDemo
         {
             try
             {
-                using (var app = new CommandLineApplication<T>(throwOnUnexpectedArg: true))
+                using (var app = new CommandLineApplication<T>())
                 {
                     var services = new ServiceCollection()
                         .AddLogging(logging =>

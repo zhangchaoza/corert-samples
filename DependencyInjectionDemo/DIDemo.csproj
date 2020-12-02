@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,12 +10,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="1.0.0-alpha-27409-01" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.2"/>
-    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="2.0.4"/>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0"/>
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.0.2"/>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Ini" Version="2.0.2"/>
+    <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="6.0.0-*" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Ini" Version="5.0.0" />
   </ItemGroup>
 
 </Project>

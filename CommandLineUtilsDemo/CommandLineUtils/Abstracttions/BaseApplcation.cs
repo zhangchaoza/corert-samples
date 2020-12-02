@@ -1,4 +1,4 @@
-namespace CommandLineUtils.Abstracttions
+﻿namespace CommandLineUtils.Abstracttions
 {
     using System.Linq;
     using McMaster.Extensions.CommandLineUtils;
@@ -9,7 +9,6 @@ namespace CommandLineUtils.Abstracttions
         public abstract string FullName { get; }
         public abstract string Description { get; }
         public abstract string ExtendedHelpText { get; }
-        public abstract bool ThrowOnUnexpectedArg { get; }
         protected abstract CommandLineApplication App { get; }
 
         protected abstract int AppExecute(string[] args);

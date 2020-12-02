@@ -1,31 +1,27 @@
-namespace BuilderApiCoreRTDemo.SubCommands
+﻿namespace BuilderApiCoreRTDemo.SubCommands
 {
+    using System;
+    using System.Threading.Tasks;
     using CommandLineUtils.Abstracttions;
     using McMaster.Extensions.CommandLineUtils;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     public class SubCommand1 : BaseAsyncSubCommandLineApp
     {
         #region Arguments
 
-        CommandArgument<int> countArg;
-        CommandArgument<string> arg2;
+        private CommandArgument<int> countArg;
+        private CommandArgument<string> arg2;
 
-        #endregion
+        #endregion Arguments
 
         #region Options
 
-        CommandOption subject;
-        CommandOption<int> repeatOption;
+        private CommandOption subject;
+        private CommandOption<int> repeatOption;
 
-        #endregion
+        #endregion Options
 
         public override string Name => nameof(SubCommand1).ToLower();
-
-        public override bool ThrowOnUnexpectedArg => true;
 
         public override string FullName => $"{Name}的全名";
 
@@ -42,7 +38,7 @@ namespace BuilderApiCoreRTDemo.SubCommands
 
         protected override BaseSubCommandLineApp RegisterSubApps()
         {
-            App.Command(name: "subcommand2", configuration: subapp => { }, throwOnUnexpectedArg: true);
+            App.Command(name: "subcommand2", configuration: subapp => { });
             RegisterSubAppsCore(new DelayCommand());
             return base.RegisterSubApps();
         }
@@ -84,6 +80,5 @@ namespace BuilderApiCoreRTDemo.SubCommands
             Console.WriteLine("fin");
             return Task.FromResult(0);
         }
-
     }
 }

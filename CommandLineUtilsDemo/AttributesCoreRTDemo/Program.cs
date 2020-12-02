@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Linq;
-using System.Reflection;
 using McMaster.Extensions.CommandLineUtils;
-using McMaster.Extensions.CommandLineUtils.Abstractions;
 
 namespace AttributesCoreRTDemo
 {
-
     internal class Program
     {
         public static int Main(string[] args)

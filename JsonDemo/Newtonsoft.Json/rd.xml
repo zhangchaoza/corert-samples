@@ -16,6 +16,5 @@
             <Type Name="Newtonsoft.Json.Utilities.CollectionWrapper`1[[JsonDemo.InnerObject,JsonDemo]]" Dynamic="Required All" />
             <Type Name="Newtonsoft.Json.JsonPropertyAttribute" Dynamic="Required All" />
         </Assembly>
-
     </Application>
 </Directives>

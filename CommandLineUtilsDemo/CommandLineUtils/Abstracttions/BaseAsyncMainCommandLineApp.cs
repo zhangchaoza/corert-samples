@@ -1,11 +1,11 @@
-namespace CommandLineUtils.Abstracttions
+﻿namespace CommandLineUtils.Abstracttions
 {
     using System.Threading.Tasks;
 
     public abstract class BaseAsyncMainCommandLineApp : BaseMainCommandLineApp
     {
-        protected BaseAsyncMainCommandLineApp(string name, string fullName, string description, string extendedHelpText = null, bool throwOnUnexpectedArg = true)
-            : base(name, fullName, description, extendedHelpText, throwOnUnexpectedArg)
+        protected BaseAsyncMainCommandLineApp(string name, string fullName, string description, string extendedHelpText = null)
+            : base(name, fullName, description, extendedHelpText)
         {
         }
 

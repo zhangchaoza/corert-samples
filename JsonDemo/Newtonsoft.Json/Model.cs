@@ -1,4 +1,4 @@
-namespace JsonDemo
+﻿namespace JsonDemo
 {
     using System.Collections.Generic;
     using System.Net;
@@ -7,7 +7,6 @@ namespace JsonDemo
     [JsonObject]
     public class Model
     {
-
         [JsonConstructor]
         public Model()
         {

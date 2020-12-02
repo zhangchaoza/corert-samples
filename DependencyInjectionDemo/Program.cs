@@ -1,14 +1,14 @@
 ﻿namespace DIDemo
 {
     using System;
+    using System.IO;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
-    using System.IO;
 
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var configRoot = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())

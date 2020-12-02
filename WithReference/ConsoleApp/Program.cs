@@ -3,9 +3,9 @@ using Common;
 
 namespace ConsoleApp
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var u = new User { Name = "zack" };
             Console.WriteLine(u.Name);

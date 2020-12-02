@@ -1,10 +1,8 @@
-namespace CommandLineUtils.Abstracttions
+﻿namespace CommandLineUtils.Abstracttions
 {
-    using McMaster.Extensions.CommandLineUtils;
     using System;
     using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
+    using McMaster.Extensions.CommandLineUtils;
 
     public abstract class BaseMainCommandLineApp : BaseApplcation
     {
@@ -15,7 +13,6 @@ namespace CommandLineUtils.Abstracttions
         public override string FullName => _app.FullName;
         public override string Description => _app.Description;
         public override string ExtendedHelpText => _app.ExtendedHelpText;
-        public override bool ThrowOnUnexpectedArg => _app.ThrowOnUnexpectedArgument;
 
         protected override CommandLineApplication App => _app;
 
@@ -23,11 +20,10 @@ namespace CommandLineUtils.Abstracttions
             string name,
             string fullName,
             string description,
-            string extendedHelpText = null,
-            bool throwOnUnexpectedArg = true)
+            string extendedHelpText = null)
         {
             _subApps = new ConcurrentDictionary<string, BaseApplcation>();
-            _app = new CommandLineApplication(throwOnUnexpectedArg: throwOnUnexpectedArg)
+            _app = new CommandLineApplication()
             {
                 Name = name,
                 FullName = fullName,
@@ -56,11 +52,11 @@ namespace CommandLineUtils.Abstracttions
 
                         if (subapp is BaseAsyncSubCommandLineApp)
                         {
-                            subcla.OnExecute(new Func<Task<int>>(() =>
+                            subcla.OnExecuteAsync(token =>
                             {
                                 subapp.OnBeforeExecute();
                                 return (subapp as BaseAsyncSubCommandLineApp).OnExecuteAsync();
-                            }));
+                            });
                         }
                         else
                         {
@@ -70,8 +66,7 @@ namespace CommandLineUtils.Abstracttions
                                 return subapp.OnExecute();
                             }));
                         }
-                    },
-                    throwOnUnexpectedArg: subapp.ThrowOnUnexpectedArg);
+                    });
                 return subapp;
             });
             return this;
@@ -107,6 +102,5 @@ namespace CommandLineUtils.Abstracttions
         }
 
         protected abstract int OnExecute();
-
     }
 }

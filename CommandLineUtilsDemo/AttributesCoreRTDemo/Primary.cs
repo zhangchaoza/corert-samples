@@ -1,24 +1,22 @@
-namespace AttributesCoreRTDemo
+﻿namespace AttributesCoreRTDemo
 {
-    using McMaster.Extensions.CommandLineUtils;
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Reflection;
+    using McMaster.Extensions.CommandLineUtils;
 
     [HelpOption("-h|--help", Description = "显示帮助", Inherited = false)]
     [VersionOptionFromMember("--version", MemberName = nameof(Version), Description = "显示版本号", Inherited = false)]
     [Subcommand(typeof(Subcommand))]
     public class Primary
     {
-
         #region Arguments
 
         [Range(1, 3)]
         [Argument(order: 0, name: "intArg", description: "Int Argument")]
         public int? IntArg { get; set; }
 
-        #endregion
+        #endregion Arguments
 
         #region Options
 
@@ -95,7 +93,7 @@ namespace AttributesCoreRTDemo
         [Argument(order: 0, name: "intArg", description: "Int Argument")]
         public int? IntArg { get; set; }
 
-        #endregion
+        #endregion Arguments
 
         public Subcommand(Primary app)
         {
@@ -118,5 +116,4 @@ namespace AttributesCoreRTDemo
         B = 2,
         C = 4
     }
-
 }

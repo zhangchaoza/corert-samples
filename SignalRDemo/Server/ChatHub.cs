@@ -1,9 +1,9 @@
-namespace Server
+﻿namespace Server
 {
-    using Common;
-    using Microsoft.AspNetCore.SignalR;
     using System;
     using System.Threading.Tasks;
+    using Common;
+    using Microsoft.AspNetCore.SignalR;
     using Newtonsoft.Json;
 
     public class ChatHub : Hub
@@ -56,5 +56,4 @@ namespace Server
             return Task.FromResult(param);
         }
     }
-
 }

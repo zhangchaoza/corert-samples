@@ -1,6 +1,5 @@
-namespace AdvancedAttributesCoreRTDemo
+﻿namespace AdvancedAttributesCoreRTDemo
 {
-    using System;
     using McMaster.Extensions.CommandLineUtils;
 
     public static class Constant
@@ -9,7 +8,7 @@ namespace AdvancedAttributesCoreRTDemo
         {
             app.Command<SubCommand1>(name: "config", configuration: subCmd =>
             {
-            }, throwOnUnexpectedArg: true);
+            });
         }
     }
 }

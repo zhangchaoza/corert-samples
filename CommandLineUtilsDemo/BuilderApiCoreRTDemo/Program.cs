@@ -1,10 +1,9 @@
 ﻿namespace BuilderApiCoreRTDemo
 {
-    using BuilderApiCoreRTDemo.SubCommands;
-    using CommandLineUtils;
-    using McMaster.Extensions.CommandLineUtils;
     using System;
     using System.Threading.Tasks;
+    using CommandLineUtils;
+    using McMaster.Extensions.CommandLineUtils;
 
     internal class BuilderApi
     {
@@ -21,15 +20,15 @@
             app.HelpOption(template: "-h|--help", inherited: true);
             app.VersionOption(template: "--version", shortFormVersion: "短版本", longFormVersion: "长版本");
             app.Option(template: "-v|--verbose", description: "显示更多信息", optionType: CommandOptionType.NoValue, inherited: true);
-            app.Command(name: "subcommand1", configuration: Subcommand1, throwOnUnexpectedArg: true);
+            app.Command(name: "subcommand1", configuration: Subcommand1);
             app.Command(name: "delaycomand", configuration: a =>
             {
-                a.OnExecute(() =>
+                a.OnExecuteAsync(token =>
                 {
                     Console.WriteLine("delay start");
                     return Task.Delay(10000).ContinueWith(t => 0);
                 });
-            }, throwOnUnexpectedArg: true);
+            });
 
             app.OnExecute(() =>
             {
@@ -46,7 +45,7 @@
             var arg2CommandArgument = app.Argument<string>(name: "arg2", description: "arg2", configuration: countArg => { }, multipleValues: false);
             var optionSubject = app.Option<string>(template: "-s|--subject <SUBJECT>", description: "The subject", optionType: CommandOptionType.SingleValue);
             var optionRepeat = app.Option<int>(template: "-r|--repeat <N>", description: "Repeat", optionType: CommandOptionType.SingleValue);
-            app.Command(name: "subcommand2", configuration: subapp => { }, throwOnUnexpectedArg: true);
+            app.Command(name: "subcommand2", configuration: subapp => { });
 
             app.OnExecute(() =>
             {

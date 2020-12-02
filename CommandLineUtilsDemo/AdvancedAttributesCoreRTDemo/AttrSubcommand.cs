@@ -1,11 +1,9 @@
-namespace AdvancedAttributesCoreRTDemo
+﻿namespace AdvancedAttributesCoreRTDemo
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
     using McMaster.Extensions.CommandLineUtils;
     using Microsoft.Extensions.Logging;
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Reflection;
 
     public class AttrSubcommand
     {
@@ -18,7 +16,7 @@ namespace AdvancedAttributesCoreRTDemo
         [Argument(order: 0, name: "intArg", description: "Int Argument")]
         public int? IntArg { get; set; }
 
-        #endregion
+        #endregion Arguments
 
         /// <summary>
         /// 不使用app.Conventions.UseConstructorInjection时AttrSubcommand必须包含无参构造函数

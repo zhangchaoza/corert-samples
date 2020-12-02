@@ -1,11 +1,10 @@
-namespace AdvancedAttributesCoreRTDemo
+﻿namespace AdvancedAttributesCoreRTDemo
 {
-    using McMaster.Extensions.CommandLineUtils;
-    using Microsoft.Extensions.Logging;
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Reflection;
+    using McMaster.Extensions.CommandLineUtils;
+    using Microsoft.Extensions.Logging;
 
     [HelpOption("-h|--help|--get-help", Description = "显示帮助", Inherited = false)]
     // [VersionOption(version: "1.0.1")]
@@ -17,7 +16,6 @@ namespace AdvancedAttributesCoreRTDemo
 
         public Primary()
         {
-
         }
 
         public Primary(ILogger<Primary> logger)
@@ -31,7 +29,7 @@ namespace AdvancedAttributesCoreRTDemo
         [Argument(order: 0, name: "intArg", description: "Int Argument")]
         public int? IntArg { get; set; }
 
-        #endregion
+        #endregion Arguments
 
         #region Options
 
@@ -105,5 +103,4 @@ namespace AdvancedAttributesCoreRTDemo
         B = 2,
         C = 4
     }
-
 }

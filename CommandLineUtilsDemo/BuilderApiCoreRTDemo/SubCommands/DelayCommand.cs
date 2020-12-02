@@ -1,16 +1,12 @@
-namespace BuilderApiCoreRTDemo.SubCommands
+﻿namespace BuilderApiCoreRTDemo.SubCommands
 {
     using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using CommandLineUtils.Abstracttions;
-    using McMaster.Extensions.CommandLineUtils;
 
     public class DelayCommand : BaseAsyncSubCommandLineApp
     {
         public override string Name => nameof(DelayCommand).ToLower();
-
-        public override bool ThrowOnUnexpectedArg => false;
 
         public override string FullName => $"{Name}的全名";
 
@@ -29,6 +25,5 @@ namespace BuilderApiCoreRTDemo.SubCommands
             return Task.Delay(10000)
                 .ContinueWith(t => 0);
         }
-
     }
 }

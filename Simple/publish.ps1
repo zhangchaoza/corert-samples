@@ -1,1 +1,1 @@
-﻿dotnet publish -c release -r win-x64 -f netcoreapp3.1
+﻿dotnet publish -c release -r win-x64 -f net5.0
