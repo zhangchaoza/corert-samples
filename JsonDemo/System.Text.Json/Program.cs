@@ -5,6 +5,7 @@
         static void Main(string[] args)
         {
             SerializeDemo.Serialize();
+            SerializeDemo.Deserialize();
         }
 
     }

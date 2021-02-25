@@ -19,7 +19,9 @@
 
         public List<object> Strings { get; set; }
 
-        public List<InnerObject> InnerArray { get; set; }
+        public List<object> Objects { get; set; }
+
+        public InnerObject[] InnerArray { get; set; }
 
         public List<InnerObject> InnerList { get; set; }
 

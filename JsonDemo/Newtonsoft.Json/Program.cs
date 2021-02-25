@@ -1,6 +1,8 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Net;
+using System.Collections.Generic;
 
 namespace JsonDemo
 {
@@ -8,33 +10,60 @@ namespace JsonDemo
     {
         private static void Main(string[] args)
         {
+            Serialize();
+            Deserialize();
+            Console.ReadLine();
+        }
+
+        private static void Serialize()
+        {
+            var m = new Model
+            {
+                Ip = new IPEndPoint(IPAddress.Loopback, 8080),
+                Id = 10,
+                Strings = new List<object> { "123", "abc你", 123 },
+                Objects = new List<object> { "123", "abc你", 123, new InnerObject { Name = "abc你" } },
+                InnerArray = new InnerObject[] { new InnerObject { Name = "abc你" } },
+                InnerList = new List<InnerObject> { new InnerObject { Name = "abc你" } },
+                InnerIList = new List<InnerObject> { new InnerObject { Name = "abc你" } },
+            };
+
+            var settings = new JsonSerializerSettings();
+            settings.Converters.Add(new IPEndPointJsonConverter());
+            var json = JsonConvert.SerializeObject(m, settings);
+            Console.WriteLine(json);
+        }
+
+        private static void Deserialize()
+        {
             string json = @"
 {
     'Ip':'10.0.1.2:8000',
     'Id':12,
     'Strings':['1','2'],
+    'Objects':['1',2,{'Name':'abc你'}],
     'InnerArray':[
         {
-            'Name':'obj1'
+            'Name':'abc你'
         },
         {
-            'Name':'obj2'
+            'Name':'abc你'
         }
     ],
     'InnerList':[
         {
-            'Name':'obj3'
+            'Name':'abc你'
         },
         {
-            'Name':'obj4'
+            'Name':'abc你'
         }
     ],
     'InnerIList':[
         {
-            'Name':'obj3'
+            'Name':'abc你'
         },
         {
-            'Name':'obj4'
+            'Name':'abc你'
         }
     ]
 }
@@ -46,7 +75,6 @@ namespace JsonDemo
             NoReflectionTest(json);
 
             ReflectionTest(json, settings);
-            Console.ReadLine();
         }
 
         private static void NoReflectionTest(string json)

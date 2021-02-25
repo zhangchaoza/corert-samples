@@ -2,12 +2,15 @@
     <Application>
         <Assembly Name="InternalJson">
             <Type Name="InternalJson.SerializeDemo+WeatherForecast,InternalJson" Dynamic="Required All" />
+            <Type Name="InternalJson.SerializeDemo+InnerObject,InternalJson" Dynamic="Required All" />
         </Assembly>
 
         <Assembly Name="System.Text.Json">
             <Type Name="System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1[[InternalJson.SerializeDemo+WeatherForecast,InternalJson]]" Dynamic="Required All" />
             <!-- <Type Name="Newtonsoft.Json.Utilities.CollectionWrapper`1[[JsonDemo.InnerObject,JsonDemo]]" Dynamic="Required All" /> -->
             <!-- <Type Name="Newtonsoft.Json.JsonPropertyAttribute" Dynamic="Required All" /> -->
+            <Type Name="System.Text.Json.Serialization.Converters.ListOfTConverter`2[[System.Collections.Generic.List`1[[System.Object,System.Private.CoreLib]],System.Private.CoreLib],[System.Object,System.Private.CoreLib]]" Dynamic="Required All" />
+            <Type Name="System.Text.Json.Serialization.Converters.IListOfTConverter`2[[System.Collections.Generic.List`1[[System.Object,System.Private.CoreLib]],System.Private.CoreLib],[System.Object,System.Private.CoreLib]]" Dynamic="Required All" />
         </Assembly>
     </Application>
 </Directives>
