@@ -1,0 +1,25 @@
+<Directives>
+    <Application>
+        <Assembly Name="MQTTnet">
+            <Type Name="MQTTnet.MqttApplicationMessage" Dynamic="Required All" />
+            <Type Name="MQTTnet.Packets.MqttUserProperty" Dynamic="Required All" />
+            <Type Name="MQTTnet.Protocol.MqttQualityOfServiceLevel[]" Dynamic="Required All" />
+            <Type Name="MQTTnet.Protocol.MqttPayloadFormatIndicator[]" Dynamic="Required All" />
+        </Assembly>
+
+        <Assembly Name="System.Text.Json">
+            <!-- MQTTnet.MqttApplicationMessage -->
+            <Type Name="System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1[[MQTTnet.MqttApplicationMessage,MQTTnet]]" Dynamic="Required All" />
+            <Type Name="System.Text.Json.Serialization.Converters.EnumConverter`1[[MQTTnet.Protocol.MqttQualityOfServiceLevel,MQTTnet]]" Dynamic="Required All" />
+            <Type Name="System.Text.Json.Serialization.Converters.ListOfTConverter`2[[System.Collections.Generic.List`1[[MQTTnet.Packets.MqttUserProperty,MQTTnet]],System.Private.CoreLib],[MQTTnet.Packets.MqttUserProperty,MQTTnet]]" Dynamic="Required All" />
+            <Type Name="System.Text.Json.Serialization.Converters.EnumConverter`1[[MQTTnet.Protocol.MqttPayloadFormatIndicator,MQTTnet]]" Dynamic="Required All" />
+            <Type Name="System.Text.Json.Serialization.Converters.NullableConverter`1[[MQTTnet.Protocol.MqttPayloadFormatIndicator,MQTTnet]]" Dynamic="Required All" />
+            <Type Name="System.Text.Json.Serialization.Converters.NullableConverter`1[[System.UInt32,System.Private.CoreLib]]" Dynamic="Required All" />
+            <Type Name="System.Text.Json.Serialization.Converters.NullableConverter`1[[System.UInt16,System.Private.CoreLib]]" Dynamic="Required All" />
+            <Type Name="System.Text.Json.Serialization.Converters.ListOfTConverter`2[[System.Collections.Generic.List`1[[System.UInt32,System.Private.CoreLib]],System.Private.CoreLib],[System.UInt32,System.Private.CoreLib]]" Dynamic="Required All" />
+
+            <!-- IList<MQTTnet.MqttApplicationMessage> -->
+            <Type Name="System.Text.Json.Serialization.Converters.IListOfTConverter`2[[System.Collections.Generic.IList`1[[MQTTnet.MqttApplicationMessage,MQTTnet]],System.Private.CoreLib],[MQTTnet.MqttApplicationMessage,MQTTnet]]" Dynamic="Required All" />
+        </Assembly>
+    </Application>
+</Directives>
