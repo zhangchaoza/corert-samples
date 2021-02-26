@@ -6,6 +6,9 @@
         {
             SerializeDemo.Serialize();
             SerializeDemo.Deserialize();
+            SerializeDemo.DeserializeJsonDocument();
+            SerializeDemo.SerializeUtf8JsonWriter();
+            SerializeDemo.DeserializeUtf8JsonWriter();
         }
 
     }

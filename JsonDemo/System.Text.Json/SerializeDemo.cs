@@ -1,6 +1,7 @@
 ﻿namespace InternalJson
 {
     using System;
+    using System.Buffers;
     using System.Collections.Generic;
     using System.Text.Json;
     using System.Text.Json.Serialization;
@@ -106,5 +107,143 @@
                 Console.WriteLine(json2);
             }
         }
+
+        public static void DeserializeJsonDocument()
+        {
+            var json = @"
+{
+  ""Date"": ""2021-02-26T03:30:17.2534607+00:00"",
+  ""TemperatureCelsius"": 30,
+  ""Summary"": ""济南Hot"",
+  ""Strings"": [
+    ""abc"",
+    123
+  ],
+  ""Objects"": [
+    ""abc"",
+    123,
+    {
+      ""Name"": ""abc""
+    }
+  ],
+  ""InnerArray"": [
+    {
+      ""Name"": ""abc""
+    }
+  ],
+  ""InnerList"": [
+    {
+      ""Name"": ""abc""
+    }
+  ],
+  ""InnerIList"": [
+    {
+      ""Name"": ""abc""
+    }
+  ]
+}
+            ";
+
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+            };
+
+            var jDoc = JsonSerializer.Deserialize<JsonDocument>(json, options);
+            if (jDoc.RootElement.TryGetProperty("Date", out var p))
+            {
+                Console.WriteLine(p.GetDateTime());
+            }
+        }
+
+        public static void SerializeUtf8JsonWriter()
+        {
+            var arrayBufferWriter = new ArrayBufferWriter<byte>();
+            using (var writer = new Utf8JsonWriter(arrayBufferWriter, new JsonWriterOptions
+            {
+                // Encoder = System.Text.Encodings.Web.JavaScriptEncoder.Create(allowedRanges: UnicodeRanges.All),
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                Indented = true
+            }))
+            {
+                writer.WriteStartObject();
+
+                writer.WriteNumber("number", 15);
+                writer.WriteString("english", "Smith");
+                writer.WriteString("汉字", "你");
+                writer.WriteString("symbol", @"~`!@#$%^&*()_-+={}[]:;'<>,.?/ ");
+                writer.WriteString("chinese_symbol", @"~·@#￥%……&*（）—-+=｛｝【】；：“”‘’《》，。？、");
+
+                writer.WriteStartArray("phoneNumbers");
+                writer.WriteStringValue("425-000-1212");
+                writer.WriteStringValue("425-000-1213");
+                writer.WriteEndArray();
+
+                writer.WriteStartObject("address");
+                writer.WriteString("street", "1 Microsoft Way");
+                writer.WriteString("city", "Redmond");
+                writer.WriteNumber("zip", 98052);
+                writer.WriteEndObject();
+
+                writer.WriteEndObject();
+                writer.Flush();
+            }
+            Console.WriteLine(System.Text.UTF8Encoding.UTF8.GetString(arrayBufferWriter.WrittenSpan));
+        }
+
+        public static void DeserializeUtf8JsonWriter()
+        {
+            var json = @"
+{
+  ""number"": 15,
+  ""english"": ""Smith"",
+  ""汉字"": ""你"",// Comment
+  ""symbol"": ""~`!@#$%^&*()_-+={}[]:;'<>,.?/ "",
+  ""chinese_symbol"": ""~·@#￥%……&*（）—-+=｛｝【】；：“”‘’《》，。？、"",
+  ""phoneNumbers"": [
+    ""425-000-1212"",
+    ""425-000-1213""
+  ],
+  ""address"": {
+    ""street"": ""1 Microsoft Way"",
+    ""city"": ""Redmond"",
+    ""zip"": 98052,
+    ""info"": null
+  }
+}
+            ";
+
+            var readerOption = new JsonReaderOptions
+            {
+                AllowTrailingCommas = true,
+                CommentHandling = JsonCommentHandling.Allow
+            };
+
+            int deep = 0;
+            var jsonReader = new Utf8JsonReader(System.Text.UTF8Encoding.UTF8.GetBytes(json).AsSpan(), readerOption);
+            while (jsonReader.Read())
+            {
+                var o = jsonReader.TokenType switch
+                {
+                    JsonTokenType.StartObject => $"{Environment.NewLine}{GetPlaceHolder(deep++)}StartObject",
+                    JsonTokenType.EndObject => $"{Environment.NewLine}{GetPlaceHolder(--deep)}EndObject",
+                    JsonTokenType.StartArray => $"{Environment.NewLine}{GetPlaceHolder(deep++)}StartArray",
+                    JsonTokenType.EndArray => $"{Environment.NewLine}{GetPlaceHolder(--deep)}EndArray",
+                    JsonTokenType.PropertyName => $"{Environment.NewLine}{GetPlaceHolder(deep)}Property:{jsonReader.GetString()}",
+                    JsonTokenType.Comment => $" Comment:{jsonReader.GetComment()}",
+                    JsonTokenType.String => $" String:{jsonReader.GetString()}",
+                    JsonTokenType.Number => $" Number:{jsonReader.GetDouble()}",
+                    JsonTokenType.True => $" True:{jsonReader.GetBoolean()}",
+                    JsonTokenType.False => $" False:{jsonReader.GetBoolean()}",
+                    JsonTokenType.Null => $" Null",
+                    _ => "",
+                };
+                Console.Write(o);
+            }
+
+            static string GetPlaceHolder(int d) => new string('\t', d);
+        }
+
     }
 }
