@@ -36,10 +36,10 @@
             RunTest("subcommand Alias", MiddlewarePipeline, "playground_arg", "abc", "100", "sub", "qwe", "--i-op=10");
             RunTest("subcommand Exception", MiddlewarePipeline, "playground_arg", "abc", "100", "errorcommand");
             RunTest("subcommand Typo Corrections", MiddlewarePipeline, "playground_arg", "abc", "100", "--file-options=1");
-            RunTest("suggest1", MiddlewarePipeline, "[suggest]", "h");// suggest指令参数缺省为0
-            RunTest("suggest2", MiddlewarePipeline, "[suggest]", "wor");
-            RunTest("suggest3", MiddlewarePipeline, "[suggest]", "suggest");
-            RunTest("suggest4", MiddlewarePipeline, "[suggest:5]", "abc subs ge");// suggest参数将在字符串索引处取单词
+            // RunTest("suggest1", MiddlewarePipeline, "[suggest]", "h");// suggest指令参数缺省为0
+            // RunTest("suggest2", MiddlewarePipeline, "[suggest]", "wor");
+            // RunTest("suggest3", MiddlewarePipeline, "[suggest]", "suggest");
+            // RunTest("suggest4", MiddlewarePipeline, "[suggest:5]", "abc subs ge");// suggest参数将在字符串索引处取单词
 
             // corert编译后程序不支持dotnet core attach
             // RunTest("debug", MiddlewarePipeline, "[debug]", "-i=3", "-i=4");
@@ -52,26 +52,21 @@
         {
             Console.WriteLine("test");
 
-            var optionThatTakesInt = new Option(
+            var optionThatTakesInt = new Option<int>(
                 alias: "--int-option",
-                description: "An option whose argument is parsed as an int")
+                description: "An option whose argument is parsed as an int",
+                getDefaultValue: () => 42)
             {
-                Argument = new Argument<int>(() => 42)
-                {
-                    Arity = ArgumentArity.ExactlyOne
-                },
+                Arity = ArgumentArity.ExactlyOne,
                 IsHidden = false
             };
             optionThatTakesInt.AddAlias("-i");
 
-            var optionThatTakesBool = new Option(
+            var optionThatTakesBool = new Option<bool>(
                 "--bool-option",
                 "An option whose argument is parsed as a bool")
             {
-                Argument = new Argument<bool>()
-                {
-                    Arity = ArgumentArity.ZeroOrOne
-                }
+                Arity = ArgumentArity.ZeroOrOne,
             };
             optionThatTakesInt.AddAlias("-b");
 
@@ -109,39 +104,30 @@
         private static int MiddlewarePipeline(params string[] args)
         {
             // Create some options and a parser
-            var optionThatTakesInt = new Option(
+            var optionThatTakesInt = new Option<int[]>(
                 alias: "--int-option",
-                description: "An option whose argument is parsed as an int[]")
+                description: "An option whose argument is parsed as an int[]",
+                getDefaultValue: () => new int[] { 1, 2, 3 })
             {
-                Argument = new Argument<int[]>(() => new int[] { 1, 2, 3 })
-                {
-                    Arity = ArgumentArity.OneOrMore
-                },
+                Arity = ArgumentArity.OneOrMore,
                 IsHidden = false
             };
             optionThatTakesInt.AddAlias("-i");
 
             // optionThatTakesInt.
-
-            var optionThatTakesBool = new Option(
+            var optionThatTakesBool = new Option<bool>(
                 alias: "--bool-option",
                 description: "An option whose argument is parsed as a bool")
             {
-                Argument = new Argument<bool>()
-                {
-                    Arity = ArgumentArity.ZeroOrOne
-                }
+                Arity = ArgumentArity.ZeroOrOne,
             };
             optionThatTakesBool.AddAlias("-b");
 
-            var optionThatTakesFileInfo = new Option(
+            var optionThatTakesFileInfo = new Option<FileInfo>(
                 alias: "--file-option",
                 description: "An option whose argument is parsed as a FileInfo")
             {
-                Argument = new Argument<FileInfo>()
-                {
-                    Arity = ArgumentArity.ExactlyOne
-                }
+                Arity = ArgumentArity.ExactlyOne
             };
 
             // Add them to the root command
@@ -156,6 +142,7 @@
             // ※ Argument顺序重要
             Argument argument = new Argument()
             {
+                Name = "playground",
                 ArgumentType = typeof(string),
                 Description = "默认参数"
             };
@@ -166,15 +153,15 @@
                 "Suggest2",
                 "substring suggest"
             });
-            rootCommand.AddArgument(argument);
+            // rootCommand.AddArgument(argument);
             Argument<string> argument1 = new Argument<string>("arg1")
             {
                 Description = "string参数"
             };
             argument1.Suggestions.Add(new SimpleSuggestSource());
-            rootCommand.AddArgument(argument1);
+            // rootCommand.AddArgument(argument1);
             Argument<int> argument2 = new Argument<int>("arg2");
-            argument2.AddSuggestions((r, textToMatch) =>
+            argument2.AddSuggestions((parseResult, textToMatch) =>
             {
                 // Console.WriteLine($"textToMatch:\u001b[31m{textToMatch}\u001b[0m");
                 return new string[]
@@ -182,10 +169,10 @@
                     "world"
                 };
             });
-            rootCommand.AddArgument(argument2);
+            // rootCommand.AddArgument(argument2);
 
             // ※ handler中可以乱序
-            rootCommand.Handler = CommandHandler.Create<string, int, string, int[], bool, FileInfo>((playground, arg2, arg1, intOption, boolOption, fileOption) =>
+            rootCommand.Handler = CommandHandler.Create<InvocationContext, string, int, string, int[], bool, FileInfo>((context, playground, arg2, arg1, intOption, boolOption, fileOption) =>
             {
                 Console.WriteLine("Arguments:");
                 Console.WriteLine($"\tplayground:{playground}");
@@ -214,17 +201,24 @@
             var builder = new CommandLineBuilder(rootCommand)
                 .AddCommand(BuildSubcommand())
                 .AddCommand(BuildErrorSubcommand())
+                .AddGlobalOption(new Option("--global", "global option sample"))// 全局选项，适用到所有子命令
                 .AddOption(optionThatTakesInt)
                 .AddOption(optionThatTakesBool)
                 .AddOption(optionThatTakesFileInfo)
+                .AddArgument(argument)
+                .AddArgument(argument1)
+                .AddArgument(argument2)
+
+                // .EnablePositionalOptions(value: true)/* 无用 */
 
                 .EnablePosixBundling(value: true)/*  对无值option生效，-b */
 
                 // .ParseResponseFileAs(responseFileHandling: ResponseFileHandling.ParseArgsAsLineSeparated) /*  添加@起始参数，从文件读取命令 */
                 .ParseResponseFileAs(responseFileHandling: ResponseFileHandling.ParseArgsAsSpaceSeparated)
+
                 // .UseDefaults()
                 // // .UseVersionOption()
-                // // .UseHelp()
+                .UseHelp()
                 // // .UseParseDirective()
                 // // .UseDebugDirective()
                 // // .UseSuggestDirective()
@@ -233,6 +227,8 @@
                 // // .UseParseErrorReporting()
                 // // .UseExceptionHandler()
                 // // .CancelOnProcessTermination()
+                
+
                 /* 自定义帮助信息输出类 */
                 .UseHelpBuilder(context =>
                 {
@@ -322,14 +318,11 @@
                 Description = "sub string参数"
             });
 
-            subcommand.AddOption(new Option(
+            subcommand.AddOption(new Option<int>(
                 aliases: new string[] { "--i-op" },
                 description: "An option whose argument is parsed as an int")
             {
-                Argument = new Argument<int>()
-                {
-                    Arity = ArgumentArity.ExactlyOne
-                }
+                Arity = ArgumentArity.ExactlyOne
             });
             subcommand.Handler = CommandHandler.Create<int, string, string, string>((iop, playground, arg1, sub_arg1) =>
             {
