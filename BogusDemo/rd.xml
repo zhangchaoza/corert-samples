@@ -1,0 +1,41 @@
+<Directives>
+    <Application>
+
+        <Assembly Name="BogusDemo" Dynamic="Required All">
+            <!-- <Type Name="BogusDemo.Order,BogusDemo" Dynamic="Required All" />
+            <Type Name="BogusDemo.User,BogusDemo" Dynamic="Required All" /> -->
+        </Assembly>
+
+        <Assembly Name="Bogus" Dynamic="Required All">
+            <Type Name="Bogus.Extensions.ExtensionsForPropertyInfo" Dynamic="Required All">
+                <Method Name="CreateSetterGeneric" Dynamic="Required All">
+                    <GenericArgument Name="BogusDemo.User, BogusDemo" />
+                    <GenericArgument Name="System.Guid, System.Private.CoreLib" />
+                </Method>
+                <Method Name="CreateSetterGeneric" Dynamic="Required All">
+                    <GenericArgument Name="BogusDemo.User, BogusDemo" />
+                    <GenericArgument Name="BogusDemo.Gender, BogusDemo" />
+                </Method>
+                <Method Name="CreateSetterGeneric" Dynamic="Required All">
+                    <GenericArgument Name="BogusDemo.Order, BogusDemo" />
+                    <GenericArgument Name="System.Int32, System.Private.CoreLib" />
+                </Method>
+                <Method Name="CreateSetterGeneric" Dynamic="Required All">
+                    <GenericArgument Name="BogusDemo.Order, BogusDemo" />
+                    <GenericArgument Name="System.Nullable`1[[System.Int32,System.Private.CoreLib]], System.Private.CoreLib" />
+                </Method>
+            </Type>
+        </Assembly>
+
+        <Assembly Name="System.Text.Json">
+            <Type Name="System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1[[BogusDemo.User,BogusDemo]]" Dynamic="Required All" />
+            <!-- <Type Name="System.Text.Json.Serialization.Converters.SmallObjectWithParameterizedConstructorConverter`1[[BogusDemo.User,BogusDemo],[System.Int32,System.Private.CoreLib],[System.String,System.Private.CoreLib],[System.Object,System.Private.CoreLib],[System.Object,System.Private.CoreLib]]" Dynamic="Required All" /> -->
+            <!-- <Type Name="Newtonsoft.Json.Utilities.CollectionWrapper`1[[JsonDemo.InnerObject,JsonDemo]]" Dynamic="Required All" /> -->
+            <!-- <Type Name="Newtonsoft.Json.JsonPropertyAttribute" Dynamic="Required All" /> -->
+            <Type Name="System.Text.Json.Serialization.Converters.ListOfTConverter`2[[System.Collections.Generic.List`1[[System.Object,System.Private.CoreLib]],System.Private.CoreLib],[System.Object,System.Private.CoreLib]]" Dynamic="Required All" />
+            <!-- <Type Name="System.Text.Json.Serialization.Converters.IListOfTConverter`2[[System.Collections.Generic.List`1[[System.Object,System.Private.CoreLib]],System.Private.CoreLib],[System.Object,System.Private.CoreLib]]" Dynamic="Required All" /> -->
+            <Type Name="System.Text.Json.Serialization.Converters.EnumConverter`1[[BogusDemo.Gender,BogusDemo]]" Dynamic="Required All" />
+            <Type Name="System.Text.Json.Serialization.Converters.NullableConverter`1[[System.Int32,System.Private.CoreLib]]" Dynamic="Required All" />
+        </Assembly>
+    </Application>
+</Directives>
