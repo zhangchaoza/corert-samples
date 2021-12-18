@@ -5,7 +5,7 @@ using Bogus;
 using Bogus.DataSets;
 using Bogus.Extensions;
 
-namespace BogusDemo
+namespace GenObject
 {
     class Program
     {

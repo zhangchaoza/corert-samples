@@ -6,8 +6,9 @@ if ($null -eq $a) {
     exit
 }
 
-bash.exe -c "tree -fi -P '*.csproj' -I 'bin|obj|debug|release|.vscode|.vs|.ionide' | grep 'csproj' > paths"
+# bash.exe -c "tree -fi -P '*.csproj' -I 'bin|obj|debug|release|.vscode|.vs|.ionide' | grep 'csproj' > paths"
 # bash.exe -c "tree -dfi --noreport -I 'bin|obj|debug|release|.vscode|.vs|.ionide' > paths"
+wsl -- "tree" "-fi" "-P" "'*.csproj'" "-I" "'bin|obj|debug|release|.vscode|.vs|.ionide'" | findstr csproj > paths
 
 if (-not (Test-Path paths) ) {
     Write-Error "Install tree in wsl first."

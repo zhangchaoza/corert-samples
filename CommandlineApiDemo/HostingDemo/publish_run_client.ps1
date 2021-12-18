@@ -1,3 +1,3 @@
-﻿dotnet.exe publish -c Release -r win-x64 -f net5.0
+﻿dotnet.exe publish -c Release -r win-x64 -f net6.0 --sc
 
-.\bin\Release\net5.0\win-x64\native\HostingDemo.exe
+.\bin\Release\net6.0\win-x64\native\HostingDemo.exe

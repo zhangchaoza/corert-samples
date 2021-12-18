@@ -1,1 +1,1 @@
-﻿dotnet publish -c release -r win-x64 -f net5.0
+﻿dotnet.exe publish -c Release -r win-x64 -f net6.0 --sc

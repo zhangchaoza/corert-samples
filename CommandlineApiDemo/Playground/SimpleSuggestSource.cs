@@ -1,17 +1,17 @@
 ﻿namespace CommandlineApiDemo
 {
     using System.Collections.Generic;
-    using System.CommandLine.Parsing;
-    using System.CommandLine.Suggestions;
+    using System.CommandLine.Completions;
 
-    internal class SimpleSuggestSource : ISuggestionSource
+    internal class SimpleSuggestSource : ICompletionSource
     {
-        public IEnumerable<string> GetSuggestions(ParseResult parseResult = null, string textToMatch = null)
+        public IEnumerable<CompletionItem> GetCompletions(CompletionContext context)
         {
-            return new string[]
+            return new CompletionItem[]
             {
-                "hello"
+                new CompletionItem("hello")
             };
         }
+
     }
 }

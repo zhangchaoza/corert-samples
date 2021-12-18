@@ -11,6 +11,8 @@
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.CommandLine.NamingConventionBinder;
+
 
     internal class Program
     {
@@ -53,7 +55,7 @@
             Console.WriteLine("test");
 
             var optionThatTakesInt = new Option<int>(
-                alias: "--int-option",
+                name: "--int-option",
                 description: "An option whose argument is parsed as an int",
                 getDefaultValue: () => 42)
             {
@@ -71,7 +73,7 @@
             optionThatTakesInt.AddAlias("-b");
 
             Console.WriteLine("rootcommand ctor");
-            var rootCommand = new RootCommandRT();
+            var rootCommand = new RootCommand();
             rootCommand.Description = "My sample app";
             rootCommand.AddOption(optionThatTakesInt);
             rootCommand.AddOption(optionThatTakesBool);
@@ -105,7 +107,7 @@
         {
             // Create some options and a parser
             var optionThatTakesInt = new Option<int[]>(
-                alias: "--int-option",
+                name: "--int-option",
                 description: "An option whose argument is parsed as an int[]",
                 getDefaultValue: () => new int[] { 1, 2, 3 })
             {
@@ -116,7 +118,7 @@
 
             // optionThatTakesInt.
             var optionThatTakesBool = new Option<bool>(
-                alias: "--bool-option",
+                name: "--bool-option",
                 description: "An option whose argument is parsed as a bool")
             {
                 Arity = ArgumentArity.ZeroOrOne,
@@ -124,7 +126,7 @@
             optionThatTakesBool.AddAlias("-b");
 
             var optionThatTakesFileInfo = new Option<FileInfo>(
-                alias: "--file-option",
+                name: "--file-option",
                 description: "An option whose argument is parsed as a FileInfo")
             {
                 Arity = ArgumentArity.ExactlyOne
@@ -132,7 +134,7 @@
 
             // Add them to the root command
             // var rootCommand = new RootCommand();
-            var rootCommand = new RootCommandRT("My sample app");
+            var rootCommand = new RootCommand("My sample app");
             rootCommand.AddAlias("pgapp");
 
             // rootCommand.AddOption(optionThatTakesInt);
@@ -143,11 +145,11 @@
             Argument argument = new Argument()
             {
                 Name = "playground",
-                ArgumentType = typeof(string),
+                ValueType = typeof(string),
                 Description = "默认参数"
             };
             // Suggest信息会显示在help中,并且会覆盖argument.name
-            argument.AddSuggestions(new string[]
+            argument.AddCompletions(new string[]
             {
                 "Suggest1",
                 "Suggest2",
@@ -158,10 +160,10 @@
             {
                 Description = "string参数"
             };
-            argument1.Suggestions.Add(new SimpleSuggestSource());
+            argument1.Completions.Add(new SimpleSuggestSource());
             // rootCommand.AddArgument(argument1);
             Argument<int> argument2 = new Argument<int>("arg2");
-            argument2.AddSuggestions((parseResult, textToMatch) =>
+            argument2.AddCompletions(c =>
             {
                 // Console.WriteLine($"textToMatch:\u001b[31m{textToMatch}\u001b[0m");
                 return new string[]
@@ -198,16 +200,17 @@
 
             // Console.WriteLine("inited");
 
+            rootCommand.AddCommand(BuildSubcommand());
+            rootCommand.AddCommand(BuildErrorSubcommand());
+            rootCommand.AddGlobalOption(new Option("--global", "global option sample"));// 全局选项，适用到所有子命令
+            rootCommand.AddOption(optionThatTakesInt);
+            rootCommand.AddOption(optionThatTakesBool);
+            rootCommand.AddOption(optionThatTakesFileInfo);
+            rootCommand.AddArgument(argument);
+            rootCommand.AddArgument(argument1);
+            rootCommand.AddArgument(argument2);
+
             var builder = new CommandLineBuilder(rootCommand)
-                .AddCommand(BuildSubcommand())
-                .AddCommand(BuildErrorSubcommand())
-                .AddGlobalOption(new Option("--global", "global option sample"))// 全局选项，适用到所有子命令
-                .AddOption(optionThatTakesInt)
-                .AddOption(optionThatTakesBool)
-                .AddOption(optionThatTakesFileInfo)
-                .AddArgument(argument)
-                .AddArgument(argument1)
-                .AddArgument(argument2)
 
                 // .EnablePositionalOptions(value: true)/* 无用 */
 
@@ -217,23 +220,23 @@
                 .ParseResponseFileAs(responseFileHandling: ResponseFileHandling.ParseArgsAsSpaceSeparated)
 
                 // .UseDefaults()
-                // // .UseVersionOption()
+                ////.UseVersionOption()
                 .UseHelp()
-                // // .UseParseDirective()
-                // // .UseDebugDirective()
-                // // .UseSuggestDirective()
-                // // .RegisterWithDotnetSuggest()
-                // // .UseTypoCorrections()
-                // // .UseParseErrorReporting()
-                // // .UseExceptionHandler()
-                // // .CancelOnProcessTermination()
-                
+                ////.UseEnvironmentVariableDirective()
+                ////.UseParseDirective()
+                ////.UseDebugDirective()
+                ////.UseSuggestDirective()
+                ////.RegisterWithDotnetSuggest()
+                ////.UseTypoCorrections()
+                ////.UseParseErrorReporting()
+                ////.UseExceptionHandler()
+                ////.CancelOnProcessTermination()
 
-                /* 自定义帮助信息输出类 */
-                .UseHelpBuilder(context =>
-                {
-                    return new HelpBuilder(context.Console);
-                })
+                // /* 自定义帮助信息输出类 */
+                // .UseHelpBuilder(context =>
+                // {
+                //     return new HelpBuilder(new LocalizationResources());
+                // })
 
                 .UseVersionOption() // 版本号选项，--version
 
@@ -253,17 +256,36 @@
                 {
                     context.Console.Error.WriteLine($"ExceptionHandler<{ex.GetType()}>:\u001b[31m{ex.Message}\u001b[0m");
                 })
-                // .UseHelp()/* help中间件优先级为4级 */
-                /* 普通中间件优先级为6级 */
-                .UseMiddleware(context =>
+
+                // | lv  | value | MiddlewareOrderInternal      | MiddlewareOrder  |
+                // | --- | ----- | ---------------------------- | ---------------- |
+                // | 1   | -4000 | Startup                      |                  |
+                // | 2   | -3000 | ExceptionHandler             |                  |
+                // | 3   | -2600 | EnvironmentVariableDirective |                  |
+                // | 4   | -2500 | ConfigureConsole             |                  |
+                // | 5   | -2400 | RegisterWithDotnetSuggest    |                  |
+                // | 6   | -2300 | DebugDirective               |                  |
+                // | 7   | -2200 | ParseDirective               |                  |
+                // | 8   | -2000 | SuggestDirective             | ExceptionHandler |
+                // | 9   | -1900 | TypoCorrection               |                  |
+                // | 10  | -1200 | VersionOption                |                  |
+                // | 11  | -1100 | HelpOption                   |                  |
+                // | 12  | -1000 |                              | Configuration    |
+                // | 13  | 0     |                              | Default          |
+                // | 14  | 1000  | ParseErrorReporting          | ErrorReporting   |
+                // .UseHelp()/* help中间件优先级为11级 */
+                // .UseHelpBuilder(context => new HelpBuilder(context.Console))
+
+                // 普通中间件优先级为13级
+                .AddMiddleware(context =>
                 {
                     // 默认执行后续中间件
-                    if (context.ParseResult.Directives.TryGetValues("command", out IEnumerable<string> value))
+                    if (context.ParseResult.Directives.TryGetValues("command", out IReadOnlyList<string> value))
                     {
                         Console.WriteLine(string.Join(',', value.ToArray()));
                     }
                 })
-                .UseMiddleware(async (context, next) =>
+                .AddMiddleware(async (context, next) =>
                 {
                     // 选择执行后续中间件
                     if (context.ParseResult.Directives.Contains("just-say-hi"))
@@ -279,7 +301,7 @@
                         await next(context);
                     }
                 })
-                .UseMiddleware(async (context, next) =>
+                .AddMiddleware(async (context, next) =>
                 {
                     if (context.ParseResult.Directives.Contains("Simple"))
                     {

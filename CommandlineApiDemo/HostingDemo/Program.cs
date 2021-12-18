@@ -5,12 +5,12 @@
     using System.CommandLine.Hosting;
     using System.Threading.Tasks;
     using System.CommandLine;
-    using System.CommandLine.Invocation;
     using System.CommandLine.Parsing;
     using System.Reflection;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
+    using System.CommandLine.NamingConventionBinder;
 
     class Program
     {
@@ -49,9 +49,9 @@
             var method = typeof(BuilderExtensions).GetMethod(nameof(Test), BindingFlags.Static | BindingFlags.NonPublic);
             var testCommand = new Command("test");
             testCommand.AddOption(new Option<string>("-a") { Arity = ArgumentArity.ExactlyOne });
-            testCommand.AddOption(new Option<bool>("-b") { Arity = ArgumentArity.ExactlyOne });
+            testCommand.AddOption(new Option<bool>("-b") { Arity = ArgumentArity.Zero });
             testCommand.Handler = CommandHandler.Create(method, null);
-            source.AddCommand(testCommand);
+            source.Command.AddCommand(testCommand);
 
             return source;
         }
