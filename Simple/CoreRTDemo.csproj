@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="7.0.0-*" />
-    <!-- <PackageReference Include="Microsoft.DotNet.ILCompiler.LLVM" Version="6.0.0-*" /> -->
+    <!-- <PackageReference Include="Microsoft.DotNet.ILCompiler.LLVM" Version="7.0.0-*" /> -->
   </ItemGroup>
 
 </Project>
