@@ -241,8 +241,20 @@
                 };
                 Console.Write(o);
             }
+            Console.WriteLine();
 
             static string GetPlaceHolder(int d) => new string('\t', d);
+        }
+
+        public static void UseAnonymous()
+        {
+            var json = JsonSerializer.Serialize(new
+            {
+                Name = "abc",
+                Age = 10
+            });
+            Console.WriteLine("*****Anonymous types need add rd.xml.I recommended to avoid using anonymous types.*******");
+            Console.WriteLine("UseAnonymous:{0}", json);
         }
 
     }
