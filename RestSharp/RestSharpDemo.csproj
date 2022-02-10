@@ -8,6 +8,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <RdXmlFile Include="rd.xml" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="RestSharp" Version="107.2.1" />
     </ItemGroup>
 
