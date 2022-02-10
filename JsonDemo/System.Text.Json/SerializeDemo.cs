@@ -248,13 +248,45 @@
 
         public static void UseAnonymous()
         {
-            var json = JsonSerializer.Serialize(new
+            Console.WriteLine("***** When number of fields < 4(Called JsonConstants.UnboxedParameterCountThreshold),");
+            Console.WriteLine("***** use [System.Text.Json.Serialization.Converters.SmallObjectWithParameterizedConstructorConverter].Need add rd.xml.");
+            Console.WriteLine("***** When use SmallObjectWithParameterizedConstructorConverter the order of fields must as same as rd.xml.");
+            Console.WriteLine("***** It is important that the name of anonymous types cannot be controlled.");
+
+            var o1 = new// <>f__AnonymousType0,use SmallObjectWithParameterizedConstructorConverter
             {
                 Name = "abc",
                 Age = 10
-            });
-            Console.WriteLine("*****Anonymous types need add rd.xml.I recommended to avoid using anonymous types.*******");
+            };
+            var json = JsonSerializer.Serialize(o1);
+
+            // var a = new { };// the define order is important
+
+            var o2 = new// <>f__AnonymousType1,use SmallObjectWithParameterizedConstructorConverter
+            {
+                Age = 10,
+                Name = "abc",
+            };
+            var json2 = JsonSerializer.Serialize(o2);
+
+            var o3 = new// <>f__AnonymousType2,use LargeObjectWithParameterizedConstructorConverter,no rd.xml needed
+            {
+                Age = 10,
+                Name = "abc",
+                Enable = false,
+                Params1 = "",
+                Params2 = "",
+                Params3 = new// <>f__AnonymousType3,use SmallObjectWithParameterizedConstructorConverter
+                {
+                    Age = 10,
+                    Name = "abc",
+                    Enable = true
+                }
+            };
+            var json3 = JsonSerializer.Serialize(o3);
             Console.WriteLine("UseAnonymous:{0}", json);
+            Console.WriteLine("UseAnonymous:{0}", json2);
+            Console.WriteLine("UseAnonymous:{0}", json3);
         }
 
     }

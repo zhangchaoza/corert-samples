@@ -4,11 +4,15 @@
             <Type Name="InternalJson.SerializeDemo+WeatherForecast,InternalJson" Dynamic="Required All" />
             <Type Name="InternalJson.SerializeDemo+InnerObject,InternalJson" Dynamic="Required All" />
             <Type Name="&lt;&gt;f__AnonymousType0`2[[System.String,System.Private.CoreLib],[System.Int32,System.Private.CoreLib]],InternalJson" Dynamic="Required All" />
+            <Type Name="&lt;&gt;f__AnonymousType1`2[[System.Int32,System.Private.CoreLib],[System.String,System.Private.CoreLib]],InternalJson" Dynamic="Required All" />
+            <Type Name="&lt;&gt;f__AnonymousType3`3[[System.Int32,System.Private.CoreLib],[System.String,System.Private.CoreLib],[System.Boolean,System.Private.CoreLib]],InternalJson" Dynamic="Required All" />
         </Assembly>
 
         <Assembly Name="System.Text.Json">
             <Type Name="System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1[[InternalJson.SerializeDemo+WeatherForecast,InternalJson]]" Dynamic="Required All" />
             <Type Name="System.Text.Json.Serialization.Converters.SmallObjectWithParameterizedConstructorConverter`5[[&lt;&gt;f__AnonymousType0`2[[System.String,System.Private.CoreLib],[System.Int32,System.Private.CoreLib]],InternalJson],[System.String,System.Private.CoreLib],[System.Int32,System.Private.CoreLib],[System.Object,System.Private.CoreLib],[System.Object,System.Private.CoreLib]]" Dynamic="Required All" />
+            <Type Name="System.Text.Json.Serialization.Converters.SmallObjectWithParameterizedConstructorConverter`5[[&lt;&gt;f__AnonymousType1`2[[System.Int32,System.Private.CoreLib],[System.String,System.Private.CoreLib]],InternalJson],[System.Int32,System.Private.CoreLib],[System.String,System.Private.CoreLib],[System.Object,System.Private.CoreLib],[System.Object,System.Private.CoreLib]]" Dynamic="Required All" />
+            <Type Name="System.Text.Json.Serialization.Converters.SmallObjectWithParameterizedConstructorConverter`5[[&lt;&gt;f__AnonymousType3`3[[System.Int32,System.Private.CoreLib],[System.String,System.Private.CoreLib],[System.Boolean,System.Private.CoreLib]],InternalJson],[System.Int32,System.Private.CoreLib],[System.String,System.Private.CoreLib],[System.Boolean,System.Private.CoreLib],[System.Object,System.Private.CoreLib]]" Dynamic="Required All" />
             <!-- <Type Name="Newtonsoft.Json.Utilities.CollectionWrapper`1[[JsonDemo.InnerObject,JsonDemo]]" Dynamic="Required All" /> -->
             <!-- <Type Name="Newtonsoft.Json.JsonPropertyAttribute" Dynamic="Required All" /> -->
             <Type Name="System.Text.Json.Serialization.Converters.ListOfTConverter`2[[System.Collections.Generic.List`1[[System.Object,System.Private.CoreLib]],System.Private.CoreLib],[System.Object,System.Private.CoreLib]]" Dynamic="Required All" />
