@@ -289,5 +289,16 @@
             Console.WriteLine("UseAnonymous:{0}", json3);
         }
 
+        public record Record1(int key, string value);
+
+        public static void UseRecord()
+        {
+            var json3 = JsonSerializer.Serialize(new Record1(key: 1, value: "test"));
+            Console.WriteLine(json3);
+
+            var r = JsonSerializer.Deserialize<Record1>(json3);
+            Console.WriteLine(r.key);
+            Console.WriteLine(r.value);
+        }
     }
 }
