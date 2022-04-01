@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <TrimmerRootAssembly Include="System.Net.WebClient" />
-    <!-- <TrimmerRootDescriptor Include="MyRoots.xml" /> -->
   </ItemGroup>
 
   <Import Project="..\corert.props" />

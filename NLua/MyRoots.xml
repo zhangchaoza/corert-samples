@@ -1,7 +1,0 @@
-<linker>
-    <assembly fullname="System.Net.WebClient">
-        <type fullname="System.Net.WebClient" preserve="all">
-            <!-- <method name="DownloadString" /> -->
-        </type>
-    </assembly>
-</linker>
