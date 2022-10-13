@@ -11,6 +11,6 @@
     <PackageReference Include="Flurl.Http" Version="3.2.2" />
   </ItemGroup>
 
-  <Import Project="..\..\corert.props" />
+  <Import Project="..\..\Native.Build.props" />
 
 </Project>

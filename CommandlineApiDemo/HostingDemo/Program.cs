@@ -29,7 +29,6 @@
                             .SetMinimumLevel(LogLevel.Trace));
                     });
                 })
-                .UseDebugDirective()
                 .UseHelp()
                 .UseTypoCorrections()
                 .UseAttributedCommands()

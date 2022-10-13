@@ -142,10 +142,9 @@
             // rootCommand.AddOption(optionThatTakesFileInfo);
 
             // ※ Argument顺序重要
-            Argument argument = new Argument()
+            Argument argument = new Argument<string>()
             {
                 Name = "playground",
-                ValueType = typeof(string),
                 Description = "默认参数"
             };
             // Suggest信息会显示在help中,并且会覆盖argument.name
@@ -202,7 +201,7 @@
 
             rootCommand.AddCommand(BuildSubcommand());
             rootCommand.AddCommand(BuildErrorSubcommand());
-            rootCommand.AddGlobalOption(new Option("--global", "global option sample"));// 全局选项，适用到所有子命令
+            rootCommand.AddGlobalOption(new Option<bool>("--global", "global option sample"));// 全局选项，适用到所有子命令
             rootCommand.AddOption(optionThatTakesInt);
             rootCommand.AddOption(optionThatTakesBool);
             rootCommand.AddOption(optionThatTakesFileInfo);
@@ -217,7 +216,7 @@
                 .EnablePosixBundling(value: true)/*  对无值option生效，-b */
 
                 // .ParseResponseFileAs(responseFileHandling: ResponseFileHandling.ParseArgsAsLineSeparated) /*  添加@起始参数，从文件读取命令 */
-                .ParseResponseFileAs(responseFileHandling: ResponseFileHandling.ParseArgsAsSpaceSeparated)
+                // .ParseResponseFileAs(responseFileHandling: ResponseFileHandling.ParseArgsAsSpaceSeparated)
 
                 // .UseDefaults()
                 ////.UseVersionOption()
@@ -242,14 +241,14 @@
 
                 .CancelOnProcessTermination() // 控制台ctrl+c取消事件
 
-                // 设置console
-                .ConfigureConsole(context =>
-                {
-                    return context.Console;
-                })
+                // // 设置console
+                // .ConfigureConsole(context =>
+                // {
+                //     return context.Console;
+                // })
                 .RegisterWithDotnetSuggest() // 需要安装dotnet-suggest
 
-                .UseDebugDirective() // 使用[debug]指令
+                // .UseDebugDirective() // 使用[debug]指令
 
                 // 命令异常处理
                 .UseExceptionHandler((ex, context) =>

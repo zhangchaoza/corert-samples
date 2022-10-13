@@ -19,6 +19,8 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
   </ItemGroup>
 
+  <Import Project="..\..\Native.Build.props" />
+
   <!-- <ItemGroup>
     <ProjectReference Include="..\..\..\..\other\CommandLineUtils\src\CommandLineUtils\McMaster.Extensions.CommandLineUtils.csproj" />
   </ItemGroup> -->

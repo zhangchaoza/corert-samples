@@ -10,6 +10,6 @@
         <PackageReference Include="FluentFTP" Version="37.0.0" />
     </ItemGroup>
 
-    <Import Project="..\corert.props" />
+    <Import Project="..\Native.Build.props" />
 
 </Project>

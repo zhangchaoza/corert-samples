@@ -7,7 +7,8 @@
 
   <ItemGroup>
     <PackageReference Include="Kurukuru" Version="1.2.0" />
-    <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="7.0.0-*" />
   </ItemGroup>
+
+  <Import Project="..\..\Native.Build.props" />
 
 </Project>

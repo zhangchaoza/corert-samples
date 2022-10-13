@@ -10,7 +10,8 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="*"/>
-    <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="7.0.0-*" />
   </ItemGroup>
+
+  <Import Project="..\..\Native.Build.props" />
 
 </Project>

@@ -2,16 +2,18 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <!-- <TargetFrameworks>net6.0;net471</TargetFrameworks> -->
     <TargetFramework>net6.0</TargetFramework>
     <StartupObject>BuilderApiCoreRTDemo.Program</StartupObject>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+  <ItemGroup>
     <RdXmlFile Include="rd.xml" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CommandLineUtils\CommandLineUtils.csproj" />
   </ItemGroup>
+
+  <Import Project="..\..\Native.Build.props" />
+
 </Project>

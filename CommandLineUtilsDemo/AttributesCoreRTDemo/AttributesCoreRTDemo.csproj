@@ -13,6 +13,8 @@
     <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="3.0.0" />
   </ItemGroup>
 
+  <Import Project="..\..\Native.Build.props" />
+
   <!-- <ItemGroup>
     <ProjectReference Include="..\..\..\..\other\CommandLineUtils\src\CommandLineUtils\McMaster.Extensions.CommandLineUtils.csproj" />
   </ItemGroup> -->
