@@ -17,6 +17,6 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Ini" Version="5.0.0" />
   </ItemGroup>
 
-  <Import Project="..\..\Native.Build.props" />
+  <Import Project="..\Native.Build.props" />
 
 </Project>

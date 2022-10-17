@@ -9,6 +9,10 @@
     <PackageReference Include="Bogus" Version="33.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <RdXmlFile Include="rd.xml" />
+  </ItemGroup>
+
   <Import Project="..\..\Native.Build.props" />
 
 </Project>

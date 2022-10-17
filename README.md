@@ -9,3 +9,13 @@
 - MakeGenericMethodDemo
 - Spectre.Console.Cli.Demo2,Spectre.Console
   - MetadataToken error
+- Flurl.Http
+  - TODO: json error
+- Newtonsoft.Json,JsonDemo
+  - TODO: json error
+- System.Text.Json,JsonDemo
+  - TODO: json error
+- System.Text.Json_MQTTnet,JsonDemo
+  - TODO: json error
+- RestSharp
+  - TODO: json error

@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FluentFTP" Version="37.0.0" />
+        <PackageReference Include="FluentFTP" Version="40.0.0" />
     </ItemGroup>
 
     <Import Project="..\Native.Build.props" />
