@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/AdvancedAttributesCoreRTDemo/bin/Debug/net6.0/AdvancedAttributesCoreRTDemo.dll",
+            "program": "${workspaceFolder}/AdvancedAttributesCoreRTDemo/bin/Debug/net7.0/AdvancedAttributesCoreRTDemo.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
@@ -24,7 +24,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/AttributesCoreRTDemo/bin/Debug/net6.0/AttributesCoreRTDemo.dll",
+            "program": "${workspaceFolder}/AttributesCoreRTDemo/bin/Debug/net7.0/AttributesCoreRTDemo.dll",
             "args": [],
             // "args": ["-o:1"],
             // "args": ["-o"],
@@ -50,7 +50,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/BuilderApiCoreRTDemo/bin/Debug/net6.0/BuilderApiCoreRTDemo.dll",
+            "program": "${workspaceFolder}/BuilderApiCoreRTDemo/bin/Debug/net7.0/BuilderApiCoreRTDemo.dll",
             // "args": [],
             // "args": [
             //     "--version"
@@ -92,7 +92,7 @@
             "request": "launch",
             "preLaunchTask": "build_linux",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/BuilderApiCoreRTDemo/bin/Debug/net6.0/BuilderApiCoreRTDemo.dll",
+            "program": "${workspaceFolder}/BuilderApiCoreRTDemo/bin/Debug/net7.0/BuilderApiCoreRTDemo.dll",
             // "args": [],
             // "args": [
             //     "--version"

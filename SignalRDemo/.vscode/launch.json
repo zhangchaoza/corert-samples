@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build_Client",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/Client/bin/Debug/net6.0/Client.dll",
+            "program": "${workspaceFolder}/Client/bin/Debug/net7.0/Client.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Client",
             // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
@@ -24,7 +24,7 @@
             "request": "launch",
             "preLaunchTask": "build_Server",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/Server/bin/Debug/net6.0/Server.dll",
+            "program": "${workspaceFolder}/Server/bin/Debug/net7.0/Server.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Client",
             // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
