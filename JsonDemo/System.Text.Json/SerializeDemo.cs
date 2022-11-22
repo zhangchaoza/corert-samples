@@ -19,10 +19,10 @@
             public DateTimeOffset Date { get; set; }
             public int TemperatureCelsius { get; set; }
             public string Summary { get; set; }
-            public List<object> Strings { get; set; }
-            public List<object> Objects { get; set; }
+            public string[] Strings { get; set; }
+            public object[] Objects { get; set; }
             public InnerObject[] InnerArray { get; set; }
-            public List<InnerObject> InnerList { get; set; }
+            // public List<InnerObject> InnerList { get; set; }// aot not supported
             public IList<InnerObject> InnerIList { get; set; }
         }
 
@@ -44,10 +44,10 @@
                 Date = DateTimeOffset.UtcNow,
                 TemperatureCelsius = 30,
                 Summary = "济南Hot",
-                Strings = new List<object> { "abc", 123, },
-                Objects = new List<object> { "abc", 123, new InnerObject { Name = "abc" } },
+                Strings = new string[] { "abc", "123", },
+                Objects = new object[] { "abc", 123, new InnerObject { Name = "abc" } },
                 InnerArray = new InnerObject[] { new InnerObject { Name = "abc" } },
-                InnerList = new List<InnerObject> { new InnerObject { Name = "abc" } },
+                // InnerList = new List<InnerObject> { new InnerObject { Name = "abc" } },
                 InnerIList = new List<InnerObject> { new InnerObject { Name = "abc" } },
             }, options);
             Console.WriteLine(jsonString);
@@ -289,16 +289,32 @@
             Console.WriteLine("UseAnonymous:{0}", json3);
         }
 
-        public record Record1(int key, string value);
+        public record Record1(string key, string value);
+        public record Record2(string key, string value, bool value2, float value3, double value4);
 
         public static void UseRecord()
         {
-            var json3 = JsonSerializer.Serialize(new Record1(key: 1, value: "test"));
-            Console.WriteLine(json3);
+            Console.WriteLine("***** When number of fields <=5 use System.Text.Json.Serialization.Converters.SmallObjectWithParameterizedConstructorConverter");
+            {
+                var json3 = JsonSerializer.Serialize(new Record1(key: "1", value: "test"));
+                Console.WriteLine(json3);
 
-            var r = JsonSerializer.Deserialize<Record1>(json3);
-            Console.WriteLine(r.key);
-            Console.WriteLine(r.value);
+                var r = JsonSerializer.Deserialize<Record1>(json3);
+                Console.WriteLine(r.key);
+                Console.WriteLine(r.value);
+            }
+
+            {
+                var json3 = JsonSerializer.Serialize(new Record2(key: "1", value: "test", true, 3.14f, 3.1415926d));
+                Console.WriteLine(json3);
+
+                var r = JsonSerializer.Deserialize<Record2>(json3);
+                Console.WriteLine(r.key);
+                Console.WriteLine(r.value);
+                Console.WriteLine(r.value2);
+                Console.WriteLine(r.value3);
+                Console.WriteLine(r.value4);
+            }
         }
     }
 }
