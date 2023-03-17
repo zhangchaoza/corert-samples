@@ -1,0 +1,10 @@
+using ICSharpCode.SharpZipLib.GZip;
+using ICSharpCode.SharpZipLib.Tar;
+
+CreateTar("Program.cs.tar", "Program.cs");
+CreateTarGZ("Program.cs.tar.gz", "Program.cs");
+
+ExtractTar("Program.cs.tar", ".");
+ExtractTGZ("Program.cs.tar.gz", ".");
+
+哈哈
