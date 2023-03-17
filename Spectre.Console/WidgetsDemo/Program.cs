@@ -65,13 +65,13 @@ using Spectre.Console;
 
 {
     var rule = new Rule("[red]Hello[/]");
-    rule.Alignment = Justify.Left;
+    rule.Justification = Justify.Left;
     AnsiConsole.Write(rule);
 }
 
 {
     var rule = new Rule("[red]Hello[/]");
-    rule.LeftAligned();
+    rule.LeftJustified();
     AnsiConsole.Write(rule);
 }
 
@@ -126,7 +126,7 @@ using Spectre.Console;
 {
     AnsiConsole.Write(
         new FigletText("Hello")
-            .LeftAligned()
+            .LeftJustified()
             .Color(Color.Red));
 }
 
