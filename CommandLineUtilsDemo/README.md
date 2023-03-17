@@ -36,11 +36,11 @@
 
 ### 1.1.1. windows ###
 
-执行`publish_run_client_attr.ps1`
+执行`publish_run_attr.ps1`
 
 ### 1.2.2. linux ###
 
-执行`publish_run_client_attr.ps1`
+执行`publish_run_attr.ps1`
 
 ## 1.2. BuilderApiCoreRTDemo ##
 
@@ -48,11 +48,11 @@
 
 ### 1.2.1. windows ###
 
-执行`publish_run_client.ps1`
+执行`publish_run.ps1`
 
 ### 1.2.2. linux ###
 
     sudo apt-get install clang-3.9
     sudo apt-get install libcurl4-openssl-dev zlib1g-dev libkrb5-dev
 
-执行`publish_run_client.sh`
+执行`publish_run.sh`

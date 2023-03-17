@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sh publish_run_client.sh
+sh publish_run.sh
 bin/Release/net7.0/linux-x64/native/CommandlineApiDemo &>rt.log
 dotnet run -c release -r linux-x64 --sc &>run.log
 

@@ -1,4 +1,4 @@
-﻿!/bin/bash
+﻿# !/bin/bash
 
 dotnet publish -c Release -r linux-x64 -f net7.0 --sc
 
