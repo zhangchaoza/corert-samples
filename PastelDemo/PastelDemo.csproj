@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Pastel" Version="2.1.0" />
+    <PackageReference Include="Pastel" Version="4.1.0" />
   </ItemGroup>
 
   <Import Project="..\Native.Build.props" />
