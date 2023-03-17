@@ -1,0 +1,7 @@
+<Directives>
+    <Application>
+        <Assembly Name="First">
+            <Type Name="SomeClass" Dynamic="Required All" />
+        </Assembly>
+    </Application>
+</Directives>
