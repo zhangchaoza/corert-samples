@@ -1,7 +1,6 @@
-namespace ApiDemo.Controllers;
-
 using Microsoft.AspNetCore.Mvc;
-using ApiDemo.Models;
+
+namespace WebApiDemo.Controllers;
 
 [ApiController]
 [Route("[controller]")]
@@ -24,7 +23,7 @@ public class WeatherForecastController : ControllerBase
     {
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
-            Date = DateTime.Now.AddDays(index),
+            Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
             TemperatureC = Random.Shared.Next(-20, 55),
             Summary = Summaries[Random.Shared.Next(Summaries.Length)]
         })
@@ -32,34 +31,13 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpPost(Name = "PostWeatherForecast")]
-    public IActionResult Post()
+    public void Post()
     {
-        return new JsonResult(new
-        {
-            status = 0,
-            info = "fin"
-        });
     }
 
-    [HttpPost("post2")]
-    public IActionResult Post2([FromBody] SimpleParams @params)
+    [HttpPost("post2", Name = "Post2WeatherForecast")]
+    public void Post2([FromBody] SimpleParams simpleParams)
     {
-        _logger.LogInformation(JsonSerializer.Serialize(@params));
-        return new JsonResult(new
-        {
-            status = 0,
-            info = "fin"
-        });
-    }
-
-    [HttpPost("post3")]
-    public IActionResult Post3([FromBody] object @params)
-    {
-        _logger.LogInformation(JsonSerializer.Serialize(@params));
-        return new JsonResult(new
-        {
-            status = 0,
-            info = "fin"
-        });
+        _logger.LogInformation("{param1} {param2}", simpleParams.Param1, simpleParams.Param2);
     }
 }

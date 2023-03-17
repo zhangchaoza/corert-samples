@@ -1,6 +1,3 @@
-global using System.Text.Json;
-global using System.Text.Json.Serialization;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

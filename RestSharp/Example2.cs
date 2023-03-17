@@ -27,23 +27,24 @@ public class Example2
         await PostJson("https://localhost:5001/WeatherForecast/post2", request =>
         {
             request.AddHeader("Content-Type", "application/json");
-            request.AddJsonBody(new
+            request.AddJsonBody(new SimpleParamsRecord
             {
                 Param1 = 1,
                 Param2 = "abc",
             });
         }, CancellationToken.None, repeatTimes: 3);
 
-        await PostJson("https://localhost:5001/WeatherForecast/post2", request =>
-        {
-            request.AddHeader("Content-Type", "application/json");
-            request.AddJsonBody(new
-            {
-                Param1 = 1,
-                Param2 = "abc",
-                Param3 = true,
-            });
-        }, CancellationToken.None, repeatTimes: 3);
+        // <>f__AnonymousType0 failed
+        // await PostJson("https://localhost:5001/WeatherForecast/post2", request =>
+        // {
+        //     request.AddHeader("Content-Type", "application/json");
+        //     request.AddJsonBody(new
+        //     {
+        //         Param1 = 1,
+        //         Param2 = "abc",
+        //         Param3 = true,
+        //     });
+        // }, CancellationToken.None, repeatTimes: 3);
     }
 
     protected static async Task<JsonElement?> PostJson(string url, Action<RestRequest> config, CancellationToken token, uint repeatTimes = 0)
@@ -51,10 +52,10 @@ public class Example2
         var options = new RestClientOptions(url)
         {
             ThrowOnAnyError = true,
-            Timeout = 1000,
+            MaxTimeout = 1000,
             Proxy = System.Net.Http.HttpClient.DefaultProxy
         };
-        var client = new RestClient(options);
+        var client = new RestClient(options, configureSerialization: s => s.UseSerializer(() => new SystemJsonSourceGenerationSerializer()));
 
         var request = new RestRequest();
         request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -154,11 +155,4 @@ repeat:
     }
 }
 
-public class SimpleParams
-{
-    [JsonPropertyName("param1")]
-    public int Param1 { get; set; }
 
-    [JsonPropertyName("param2")]
-    public string? Param2 { get; set; }
-}

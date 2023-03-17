@@ -1,47 +1,31 @@
 namespace RestSharpDemo;
 
+using System.Text.Json;
+
 public class Example1
 {
     public static async Task Run()
     {
-        var options = new RestClientOptions("https://api.muxiaoguo.cn/api/bad_or_luck")
+        var options = new RestClientOptions("https://localhost:5001/WeatherForecast")
         {
             ThrowOnAnyError = true,
-            Timeout = 1000
+            MaxTimeout = 1000,
         };
-        var client = new RestClient(options);
+        var client = new RestClient(options, configureSerialization: s => s.UseSerializer(() => new SystemJsonSourceGenerationSerializer()));
 
         var request = new RestRequest()
-            .AddQueryParameter("Num", "11111111111");
+            .AddQueryParameter("city", "jn");
 
-        var response = await client.PostAsync<MyResponse>(request, CancellationToken.None);
+        var jsonString = JsonSerializer.Serialize(new WeatherForecast(), SourceGenerationContext.Default.WeatherForecast);
 
-        Console.WriteLine(response?.Msg);
-        Console.WriteLine(response?.Data?.Analysis);
-        Console.WriteLine(response?.Data?.BadORluck);
+        var response = await client.GetAsync<WeatherForecast[]>(request, CancellationToken.None);
+
+        foreach (var weather in response ?? throw new NullReferenceException())
+        {
+            Console.WriteLine(weather?.Summary);
+            Console.WriteLine(weather?.Date);
+            Console.WriteLine(weather?.TemperatureC);
+            Console.WriteLine(weather?.TemperatureF);
+        }
     }
-}
-
-public class MyResponse
-{
-    [JsonPropertyName("code")]
-    public int Code { get; set; }
-
-    [JsonPropertyName("msg")]
-    public string? Msg { get; set; }
-
-    [JsonPropertyName("data")]
-    public Data? Data { get; set; }
-}
-
-public class Data
-{
-    [JsonPropertyName("fraction")]
-    public string? Fraction { get; set; }
-
-    [JsonPropertyName("analysis")]
-    public string? Analysis { get; set; }
-
-    [JsonPropertyName("badORluck")]
-    public string? BadORluck { get; set; }
 }
