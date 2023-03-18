@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="mqttnet" Version="4.1.4.563" />
+  </ItemGroup>
+
+  <Import Project="..\..\Native.Build.props" />
+
+</Project>
