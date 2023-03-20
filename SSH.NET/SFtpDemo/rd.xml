@@ -1,0 +1,8 @@
+<Directives>
+    <Application>
+        <Assembly Name="Renci.SshNet">
+            <!-- maybe change https://github.com/sshnet/SSH.NET/tree/bd7c02f6e43e9de77fad745fda9b053605ef9c67/src/Renci.SshNet/Security -->
+            <Type Name="Renci.SshNet.Security.KeyExchangeECCurve25519" Dynamic="Required All" />
+        </Assembly>
+    </Application>
+</Directives>
