@@ -1,5 +1,5 @@
 ﻿#!/bin/sh
 
-dotnet publish -c Release -r linux-x64 -f net7.0 --sc
+dotnet publish -c Release -r linux-x64
 
-./bin/Release/net7.0/linux-x64/publish/LiveDisplayDemo
+./bin/Release/net8.0/linux-x64/publish/LiveDisplayDemo

@@ -6,11 +6,6 @@
 
   <ItemGroup>
     <PackageReference Include="Spectre.Console" Version="0.48.0" />
-    <PackageReference Include="Spectre.Console.Cli" Version="0.48.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TrimmerRootDescriptor Include="trim.xml" />
   </ItemGroup>
 
   <Import Project="..\..\Native.Build.props" />
