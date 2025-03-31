@@ -12,7 +12,7 @@ app.Configure(config =>
         add.AddCommand<AddReferenceCommand>("reference");
     });
 
-    config.SetExceptionHandler(ex =>
+    config.SetExceptionHandler((ex, tr) =>
     {
         AnsiConsole.WriteException(ex, ExceptionFormats.ShortenEverything);
         return -99;

@@ -1,6 +1,7 @@
 ﻿// Create a table
 using SixLabors.ImageSharp.Processing;
 using Spectre.Console;
+using Spectre.Console.Json;
 
 {
     var table = new Table();
@@ -178,4 +179,41 @@ using Spectre.Console;
 
     // Render the image to the console
     AnsiConsole.Write(image);
+}
+
+{
+    var json = new JsonText(
+    """
+    { 
+        "hello": 32, 
+        "world": { 
+            "foo": 21, 
+            "bar": 255,
+            "baz": [
+                0.32, 0.33e-32,
+                0.42e32, 0.55e+32,
+                {
+                    "hello": "world",
+                    "lol": null
+                }
+            ]
+        } 
+    }
+    """);
+
+    AnsiConsole.Write(
+        new Panel(json)
+            .Header("Some JSON in a panel")
+            .Collapse()
+            .RoundedBorder()
+            .BorderColor(Color.Yellow));
+}
+
+{
+    var path = new TextPath("C:/This/Path/Is/Too/Long/To/Fit/In/The/Area.txt")
+        .RootColor(Color.Red)
+        .SeparatorColor(Color.Green)
+        .StemColor(Color.Blue)
+        .LeafColor(Color.Yellow);
+    AnsiConsole.Write(path);
 }
