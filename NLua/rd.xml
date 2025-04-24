@@ -2,6 +2,13 @@
     <Application>
         <Assembly Name="First">
             <Type Name="SomeClass" Dynamic="Required All" />
+            <Type Name="FunctionParam1" Dynamic="Required All" />
+            <Type Name="SubFunctionParamRecord" Dynamic="Required All" />
+        </Assembly>
+        <Assembly Name="System.Private.CoreLib">
+            <Type Name="System.Collections.Generic.Dictionary`2" Dynamic="Required All" />
+            <Type Name="System.Collections.Generic.Dictionary`2+Enumerator" Dynamic="Required All" />
+            <Type Name="System.Collections.Generic.KeyValuePair`2" Dynamic="Required All" />
         </Assembly>
     </Application>
 </Directives>

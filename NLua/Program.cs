@@ -13,6 +13,6 @@ using (Lua lua = new Lua())
     Console.WriteLine("local var:{0}", res2);
 }
 
-RunLua.Run();
+// RunLua.Run();
 UseCSharpObject.Run();
-UseNetAssemblies.Run();
+// UseNetAssemblies.Run();
