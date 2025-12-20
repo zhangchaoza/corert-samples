@@ -67,8 +67,12 @@ public class SystemJsonSourceGenerationSerializer : IRestSerializer, ISerializer
     public ContentType ContentType { get; set; } = ContentType.Json;
 
     public ISerializer Serializer => this;
+
     public IDeserializer Deserializer => this;
+
     public DataFormat DataFormat => DataFormat.Json;
+
     public string[] AcceptedContentTypes => ContentType.JsonAccept;
+
     public SupportsContentType SupportsContentType => contentType => contentType.Value.EndsWith("json", StringComparison.InvariantCultureIgnoreCase);
 }

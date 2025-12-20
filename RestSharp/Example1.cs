@@ -9,7 +9,7 @@ public class Example1
         var options = new RestClientOptions("https://localhost:5001/WeatherForecast")
         {
             ThrowOnAnyError = true,
-            MaxTimeout = 1000,
+            Timeout = TimeSpan.FromSeconds(1),
         };
         var client = new RestClient(options, configureSerialization: s => s.UseSerializer(() => new SystemJsonSourceGenerationSerializer()));
 

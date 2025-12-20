@@ -52,7 +52,7 @@ public class Example2
         var options = new RestClientOptions(url)
         {
             ThrowOnAnyError = true,
-            MaxTimeout = 1000,
+            Timeout = TimeSpan.FromSeconds(1),
             Proxy = System.Net.Http.HttpClient.DefaultProxy
         };
         var client = new RestClient(options, configureSerialization: s => s.UseSerializer(() => new SystemJsonSourceGenerationSerializer()));

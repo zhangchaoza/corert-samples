@@ -4,6 +4,5 @@
     </PropertyGroup>
     <ItemGroup>
         <IlcArg Include="--stacktracedata" />
-        <!-- <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="7.0.0-*" /> -->
     </ItemGroup>
 </Project>

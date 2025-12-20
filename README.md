@@ -18,8 +18,6 @@
 - NativeLibrary
   - static failed
 - Nlua
-- RestSharp
-  - TODO: json error
 - Spectre.Console
   - Spectre.Console.Cli.Demo
   - Spectre.Console.Cli.Demo2
