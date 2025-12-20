@@ -2,16 +2,12 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
     <Version>1.2.1</Version>
   </PropertyGroup>
 
 
   <ItemGroup>
     <RdXmlFile Include="rd.xml" />
-    <!-- Generate extra data to make stack traces nicer -->
-    <IlcArg Include="--stacktracedata" />
   </ItemGroup>
 
   <ItemGroup>

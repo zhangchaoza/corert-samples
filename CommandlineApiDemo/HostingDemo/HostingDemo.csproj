@@ -2,15 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
-
-  <ItemGroup>
-    <!-- <RdXmlFile Include="rd.xml" /> -->
-    <!-- Generate extra data to make stack traces nicer -->
-    <IlcArg Include="--stacktracedata" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.CommandLine.Hosting" Version="0.4.0-alpha.22272.1" />
